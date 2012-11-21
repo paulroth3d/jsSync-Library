@@ -1,0 +1,393 @@
+<?xml version='1.0'?>
+<project default="help">
+
+	<property name="ci.dir" value="ci" />
+	<property name="ci.path" value="${ci.dir}" />
+	<property name="ci.lib" value="${ci.path}/lib" />
+	
+	<!-- task definitions -->
+	<taskdef resource="net/sf/antcontrib/antcontrib.properties">
+		<classpath>
+			<pathelement location="${ci.lib}/ant-contrib-1.0b3.jar" />
+		</classpath>
+	</taskdef>
+	
+	<!-- apply the build.environment.template if build.environment does not exist -->
+	<available file="build.environment" property="build.environment.found" />
+	<if>
+		<equals arg1="${build.environment.found}" arg2="$${build.environment.found}" />
+		<then>
+			<copy file="build.environment.template" tofile="build.environment" />
+		</then>
+	</if>
+	
+	<!-- properties that will never change -->
+	<property name="source.dir" value="GE_MobileMap" />
+
+	<property name="output.dir" value="output" />
+
+	<property name="test.dir" value="tests" />
+	<property name="testSpecs.dir" value="specs" />
+	<property name="testMocks.dir" value="mocks" />
+	<property name="testStubs.dir" value="stubs" />
+	<property name="testRunner.dir" value="runner" />
+	<!-- must match Jasmine-Runner.js -->
+	<property name="testResults.file" value="_jasmineErrors.txt" />
+	<property name="testsRunner.file" value="Jasmine-Runner.js" />
+	<property name="doc.dir" value="doc" />
+	<property name="doc.gen.dir" value="gen" />
+	<property name="doc.config.file" value="yuidoc.json" />
+	
+	<property name="dist.dir" value="dist" />
+	<property name="dist.file" value="JSSynch.js" />
+	
+	<property name="asynch.file" value="asynch.json" />
+	
+	<!-- properties loaded from files -->
+	<property file="build.properties" />
+	<property file="build.environment" />
+	
+	<!-- default properties -->
+	
+	<!-- calculated properties -->
+	<property name="source.path" value="${source.dir}" />
+	
+	<property name="output.path" value="${ci.path}/${output.dir}" />
+	<property name="test.path" value="${ci.path}/${test.dir}" />
+	<property name="testSpecs.path" value="${test.path}/${testSpecs.dir}" />
+	<property name="testMocks.path" value="${test.path}/${testMocks.dir}" />
+	<property name="testStubs.path" value="${test.path}/${testStubs.dir}" />
+	<property name="testRunner.path" value="${test.path}/${testRunner.dir}" />
+	<property name="testResults.path" value="${output.path}/${testResults.file}" />
+	<property name="testsRunner.path" value="${testRunner.path}/${testsRunner.file}" />
+	<property name="doc.path" value="${ci.path}/${doc.dir}" />
+	<property name="doc.gen.path" value="${doc.path}/${doc.gen.dir}" />
+	<property name="doc.config.path" value="${doc.path}/${doc.config.file}" />
+	
+	<property name="dist.path" value="${dist.dir}" />
+	<property name="dist.file.path" value="${dist.path}/${dist.file}" />
+	
+	<available file="${jenkins.phantomjs.path}" property="jenkins.phantomjs.found" />
+	<available file="${yui.jar.path}" property="yui.jar.found" />
+	
+	<property name="asynch.path" value="${source.path}/${syncJson.file}" />
+
+	<!--
+	Method that prints out the current values for properties
+	-->
+	<target name="prop" description="Lists out property values" >
+		<echo>
+minification.order=${minification.order}
+build.version=${build.version}
+branch_name=${branch_name}
+
+source.path=${source.path}
+ci.path=${ci.path}
+output.path=${output.path}
+test.path=${test.path}
+testSpecs.path=${testSpecs.path}
+testMocks.path=${testMocks.path}
+testStubs.path=${testStubs.path}
+testRunner.path=${testRunner.path}
+testResults.path=${testResults.path}
+testsRunner.path=${testsRunner.path}
+
+doc.path=${doc.path}
+doc.gen.path=${doc.gen.path}
+doc.config.path=${doc.config.path}
+
+jenkins.phantomjs.found=${jenkins.phantomjs.found}
+yui.jar.found=${yui.jar.found}
+
+		</echo>
+	</target>
+	
+	<!--
+	Description of project
+	-->
+	<target name="help">
+		<echo>
+GE GeoMapping project
+Intuitive and integrated geolocation-based account filtering, planning and route optimizing for mobile field sales users
+
+Builder/CI Scripts.
+
+A list of all ant targets can be found by running the following command:
+$>ant -p
+
+High level targets are generally groups of targets meant to accomplish high level tasks
+Intermediate level targets often accomplish a specific activity.
+Internal level targets are not meant to be called explicitly, but only by calling something else.
+		</echo>
+	</target>
+	
+	<!--
+	#	#	#	#	#	#	#	#	#	#	#	#	#	#	#	#	#	#	#	
+	HIGH LEVEL targets
+	#	#	#	#	#	#	#	#	#	#	#	#	#	#	#	#	#	#	#	
+	-->
+	<target name="build">
+	</target>
+	
+	<target name="doc">
+	</target>
+	
+	<target name="minify" depends="minifyByName">
+	</target>
+	
+	<target name="test" depends="run_jasmine">
+	</target>
+	
+	<target name="dist" depends="test,minify,removeFullFiles,build,doc">
+	</target>
+	
+	<!--
+	#	#	#	#	#	#	#	#	#	#	#	#	#	#	#	#	#	#	#	
+	INTERMEDIATE LEVEL targets
+	#	#	#	#	#	#	#	#	#	#	#	#	#	#	#	#	#	#	#	
+	-->
+	
+	<target name="run_jasmine">
+		<!-- use explicit path if running on jenkins -->
+		<available file="${jenkins.phantomjs.path}" property="jenkins.phantomjs.found" type="file" />
+		<if>
+			<equals arg1="${jenkins.phantomjs.found}" arg2="$${jenkins.phantomjs.found}" />
+			<then>
+				<exec executable="phantomjs" failonerror="false" resultproperty="jasmineResult">
+					<arg value="${testsRunner.path}" />
+				</exec>
+			</then>
+			<else>
+				<exec executable="${jenkins.phantomjs.path}" failonerror="false" resultproperty="jasmineResult">
+					<arg value="${testsRunner.path}" />
+				</exec>
+			</else>
+		</if>
+		
+		<if>
+			<equals arg1="${jasmineResult}" arg2="0" />
+			<then>
+				<echo>Tests did not fail</echo>
+			</then>
+			<else>
+				<echo>Tests failed</echo>
+				
+				<loadfile property="jasmineResults.contents" srcfile="${testResults.path}" />
+				<echo>${jasmineResults.contents}</echo>
+				
+				<fail>HALT : due to Jasmine test failures</fail>
+			</else>
+		</if>
+	</target>
+	
+	<!--
+	/**
+	 *  Minifies all files listed in 'minification.order'
+	 *  (commonly set in build.properties)
+	 *  @depends minifyFile
+	**/
+	-->
+	<target name="minifyByList">
+		<echo>List of files to minify: ${minification.order}</echo>
+		<foreach
+			target="minifyFile"
+			param="minify.target"
+			list="${minification.order}"
+			delimiter=","
+			parallel="false"
+			trim="true"
+		/>
+		
+		<echo>Done.</echo>
+	</target>
+	
+	<!--
+	/**
+	 *  Minifies all files found under the www folder with .full.js as the extension.
+	 *  Similar can be accomplished for CSS.
+	 *  @depends minifyFile
+	**/
+	-->
+	<target name="minifyByName">
+		<foreach
+			target="minifyFile"
+			param="minify.target"
+			parallel="false"
+			trim="true"
+		>
+			<path>
+				<!-- <filelist dir="${source.path}" files="*.full.txt" /> -->
+				<fileset dir="${source.path}" casesensitive="false">
+					<include name="**/*.full.js" />
+				</fileset>
+			</path>
+		</foreach>
+		
+		<echo>Done.</echo>
+	</target>
+	
+	<!--
+	/**
+	 *  Removes all files with the .full.js extension
+	 *  (commonly called with minifyByName)
+	**/
+	-->
+	<target name="removeFullFiles">
+		<delete> 
+			<fileset dir="${source.path}" casesensitive="false">
+				<include name="**/*.full.js" />
+			</fileset>
+		</delete>
+	</target>	
+	
+	<target name="combine">
+		<echo>Minification groups:${minification.order}</echo>
+		<property name="combination.path" value="${output.path}/c" />
+		
+		<concat append="true" destfile="${dist.file.path}" fixlastline="true">
+			<filelist dir="${source.path}" files="asynch.js" />
+		</concat>
+	</target>
+	
+	<!--
+	/**
+	 *  Creates documentation
+	**/
+	-->
+	<target name="docGen">
+		<delete dir="${doc.gen.path}" />
+		<mkdir dir="${doc.gen.path}" />
+		
+		<exec executable="yuidoc" failifexecutionfails="true">
+			<arg value="-c" />
+			<arg value="${doc.config.path}" />
+			<arg value="-o" />
+			<arg value="${doc.gen.path}" />
+			<arg value="${source.path}" />
+		</exec>
+	</target>
+	
+	<target name="docZip">
+		
+	</target>
+
+	<!--
+	#	#	#	#	#	#	#	#	#	#	#	#	#	#	#	#	#	#	#	
+	INTERNAL LEVEL targets
+	#	#	#	#	#	#	#	#	#	#	#	#	#	#	#	#	#	#	#	
+	-->
+	
+	<target name="applyVersion" description="Applies the version defined in build.properties to the MMSync.js file">
+		<echo>Applying library version ${build.version} to the project</echo>
+		<replaceregexp file="${asynch.path}"
+				match='["]appVersion["]:["][^"\n]+["]'
+				replace='"appVersion":"${build.version}"'
+				flags="img" encoding="UTF-8"
+		/>
+		
+		<!-- any additional files that need to be applied -->
+	</target>
+	
+	<target name="getBranch">
+		<exec executable="git" outputproperty="q_branch_name">
+			<arg value="symbolic-ref" />
+			<arg value="HEAD" />
+		</exec>
+		
+		<propertyregex property="branch_name"
+			input="${q_branch_name}"
+			regexp="refs/heads/"
+			replace=""
+			global="true"
+			casesensitive="false"
+			/>
+		
+		<echo>q_branch_name=${q_branch_name}</echo>
+		<echo>branch_name=${branch_name}</echo>
+	</target>
+	
+	
+	<!--
+	/**
+	 *  Minifies the specific target sent through 'minify.target'
+	 *  Either the minification is applied to a separate file (if .full. is found in the name)
+	 *  or applied in place otherwise
+	**/
+	-->
+	<target name="minifyFile">
+		<var name="minify.target.found" unset="true" />
+		<available file="${minify.target}" property="minify.target.found" />
+		
+		<if>
+			<not><equals arg1="${minify.target.found}" arg2="$${minify.target.found}" /></not>
+			<then>
+				<var name="minify.target.name" unset="true" />
+				<propertyregex property="minify.target.name"
+					input="${minify.target}"
+					regexp="[.]full[.](\w+)"
+					replace=".min.\1"
+					casesensitive="false"
+				/>
+				
+				<echo>Attempting to minify [${minify.target}] [${minify.target.name}]</echo>
+				
+				<if>
+					<equals arg1="${minify.target.name}" arg2="$${minify.target.name}" />
+					<then>
+						<!-- minify in place -->
+						<var name="minify.target.name" unset="true" />
+						<var name="minify.target.name" value="${minify.target}" />
+					</then>
+				</if>
+				
+				<java
+					jar="${yui.jar.path}"
+					fork="true"
+				>
+					<arg value="--type" />
+					<arg value="js" />
+					<arg value="-o" />
+					<arg value="${minify.target.name}" />
+					<arg value="${minify.target}" />
+				</java>
+			</then>
+			<else>
+				<echo>Unable to minify [${minify.target}]</echo>
+			</else>
+		</if>
+	</target>
+	
+	<!--
+	/** Sample automated commit target **/
+	<target name="commitDist">
+		<echo>Preparing to commit the deliverables in the Dist directory</echo>
+		
+		<echo>Adding the files</echo>
+		<exec executable="git">
+			<arg value="add" />
+			<arg value="-A" />
+		</exec>
+		
+		<echo>Commiting the changed files</echo>
+		<exec executable="git">
+			<arg value="commit" />
+			<arg value="-m" />
+			<arg value="${dist.commit.message.final}" />
+		</exec>
+		
+		<#
+		Unfortunately, determining the branch programatically does not work
+		as jenkins doesn't used a name RefSpec when doing the checkout.
+		In other words running `git symbolic-ref HEAD` will not return anything
+		as the branch is currently "* (no branch)"
+		#>
+		
+		<echo>Pushing the committed changes [${branch_name}]</echo>
+		<exec executable="git">
+			<arg value="push" />
+			<arg value="origin" />
+			<arg value="${branch_name}" />
+		</exec>
+	</target>
+	-->
+</project>

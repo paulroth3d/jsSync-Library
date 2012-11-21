@@ -1,0 +1,10 @@
+# Properties that are specific to this local instance should be placed here
+# Properties that should be shared should be placed in build.properties
+
+#path to say where phantomjs resides
+jenkins.phantomjs.path=/usr/local/sbin/phantomjs
+
+#path where the yui compressor lies
+yui.jar.path=ci/lib/yuicompressor-2.4.7.jar
+
+

@@ -1,0 +1,29 @@
+<?xml version='1.0'?>
+<project default="run_jasmine">
+
+	<taskdef resource="net/sf/antcontrib/antcontrib.properties">
+		<classpath>
+			<pathelement location="lib/ant-contrib-1.0b3.jar" />
+		</classpath>
+	</taskdef>
+	
+	<target name="run_jasmine">
+		<exec executable="phantomjs" failonerror="false" resultproperty="jasmineResult">
+			<arg value="Jasmine-Runner.js" />
+		</exec>
+		
+		<!--
+		<echo>Result:[${jasmineResult}]</echo>
+		-->
+		
+		<if>
+			<equals arg1="${jasmineResult}" arg2="0" />
+			<then>
+				<echo>did not fail</echo>
+			</then>
+			<else>
+				<echo>DID FAIL</echo>
+			</else>
+		</if>
+	</target>
+</project>
