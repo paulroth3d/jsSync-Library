@@ -2,1808 +2,154 @@
     "project": {
         "name": "MM Sync Engine",
         "description": "GE MobileMap",
-        "version": "0.0.1",
-        "logo": "http://mm-proth.s3.amazonaws.com/ge_mobileMap/icon/icon-72.png"
+        "appVersion": "1.0.0",
+        "logo": "http://mm-proth.s3.amazonaws.com/syncIcon.png"
     },
     "files": {
-        "GE_MobileMap/www/lib/MM_JSSyncEngine/MM_JSSyncEngine.js": {
-            "name": "GE_MobileMap/www/lib/MM_JSSyncEngine/MM_JSSyncEngine.js",
+        "src/asynch.js": {
+            "name": "src/asynch.js",
             "modules": {
-                "MM_JSSyncEngine": 1,
-                "SalesforceAjaxToolkit": 1
+                "JSAsynch": 1
             },
             "classes": {
-                "vo.MetadataVO": 1,
-                "sforce": 1,
-                "sforce.StringBuffer": 1,
-                "sforce.Base64Binary": 1,
-                "sforce.Xml": 1,
-                "sforce.XmlWriter": 1,
-                "sforce.XmlReader": 1,
-                "sforce.SoapTransport": 1,
-                "sforce.SObject": 1,
-                "sforce.LeadConvert": 1,
-                "sforce.MergeRequest": 1,
-                "sforce.Connection": 1,
-                "Network": 1,
-                "OfflineQueue": 1,
-                "MMSync": 1,
-                "SObject": 1,
-                "Util": 1,
-                "MMJSE_SmartStoreUtil": 1
+                "Callback": 1,
+                "EmptyCallback": 1,
+                "SuccessFailCallback": 1,
+                "CountdownCallback": 1,
+                "NamedLatch": 1,
+                "CyclicalCallback": 1,
+                "RunnableCallback": 1
             },
             "fors": {
-                "sforce": 1,
-                "sforce.Base64Binary": 1,
-                "sforce.internal": 1,
-                "sforce.Xml": 1,
-                "sforce.XmlWriter": 1,
-                "sforce.XmlReader": 1,
-                "sforce.SoapTransport": 1
+                "Callback": 1,
+                "SuccessFailCallback": 1,
+                "CountdownCallback": 1
             },
-            "namespaces": {}
-        },
-        "GE_MobileMap/www/lib/forcetk.js": {
-            "name": "GE_MobileMap/www/lib/forcetk.js",
-            "modules": {
-                "Forcetk": 1
-            },
-            "classes": {
-                "ForcetkClient": 1
-            },
-            "fors": {},
             "namespaces": {}
         }
     },
     "modules": {
-        "MM_JSSyncEngine": {
-            "name": "MM_JSSyncEngine",
-            "submodules": {
-                "undefined": 1
-            },
+        "JSAsynch": {
+            "name": "JSAsynch",
+            "submodules": {},
             "classes": {
-                "sforce": 1,
-                "Network": 1,
-                "OfflineQueue": 1,
-                "MMSync": 1,
-                "SObject": 1,
-                "Util": 1,
-                "MMJSE_SmartStoreUtil": 1
+                "Callback": 1,
+                "EmptyCallback": 1,
+                "SuccessFailCallback": 1,
+                "CountdownCallback": 1,
+                "NamedLatch": 1,
+                "CyclicalCallback": 1,
+                "RunnableCallback": 1
             },
-            "fors": {},
+            "fors": {
+                "Callback": 1,
+                "SuccessFailCallback": 1,
+                "CountdownCallback": 1
+            },
             "namespaces": {},
             "tag": "module",
-            "file": "GE_MobileMap/www/lib/MM_JSSyncEngine/MM_JSSyncEngine.js",
-            "line": 5046,
-            "description": "Network utility class",
+            "file": "src/asynch.js",
+            "line": 476,
+            "description": "Object that represents a specific method invocation that can be called at any time\n(or repeatedly) in an agnostic manner.",
             "is_constructor": 1,
             "params": [
                 {
-                    "name": "name",
-                    "description": "",
-                    "type": "String"
+                    "name": "thisObj",
+                    "description": "(Object) the scope object (commonly used for 'this') that the method will run in."
                 },
                 {
-                    "name": "metadataResponse",
-                    "description": "",
-                    "type": "Object"
-                },
-                {
-                    "name": "lastSync",
-                    "description": ""
-                },
-                {
-                    "name": "soupEntryId",
-                    "description": "",
-                    "type": "String"
+                    "name": "fn",
+                    "description": "(Function) the function to call"
                 }
-            ],
-            "requires": [
-                "jQuery 1.2.3 or later",
-                "jquery.blockUI plugin",
-                "Salesforce forceTk",
-                "OfflineQueue",
-                "sync.json"
             ]
-        },
-        "SalesforceAjaxToolkit": {
-            "name": "SalesforceAjaxToolkit",
-            "submodules": {},
-            "classes": {
-                "vo.MetadataVO": 1,
-                "sforce.StringBuffer": 1,
-                "sforce.Base64Binary": 1,
-                "sforce.internal": 1,
-                "sforce.Xml": 1,
-                "sforce.XmlWriter": 1,
-                "sforce.XmlReader": 1,
-                "sforce.SoapTransport": 1,
-                "sforce.SObject": 1,
-                "sforce.LeadConvert": 1,
-                "sforce.MergeRequest": 1,
-                "sforce.Connection": 1
-            },
-            "fors": {
-                "sforce": 1,
-                "sforce.Base64Binary": 1,
-                "sforce.internal": 1,
-                "sforce.Xml": 1,
-                "sforce.XmlWriter": 1,
-                "sforce.XmlReader": 1,
-                "sforce.SoapTransport": 1
-            },
-            "namespaces": {},
-            "tag": "module",
-            "file": "GE_MobileMap/www/lib/MM_JSSyncEngine/MM_JSSyncEngine.js",
-            "line": 2644,
-            "description": "Salesforce.com AJAX Connector 25.0\nCopyright, 1999, salesforce.com, inc.\nAll Rights Reserved"
-        },
-        "Forcetk": {
-            "name": "Forcetk",
-            "submodules": {},
-            "classes": {
-                "ForcetkClient": 1
-            },
-            "fors": {},
-            "namespaces": {},
-            "tag": "module",
-            "file": "GE_MobileMap/www/lib/forcetk.js",
-            "line": 51,
-            "description": "The Client provides a convenient wrapper for the Force.com REST API, \nallowing JavaScript in Visualforce pages to use the API via the Ajax\nProxy.",
-            "params": [
-                {
-                    "name": "clientId",
-                    "description": "'Consumer Key' in the Remote Access app settings",
-                    "optional": true,
-                    "optdefault": "null"
-                },
-                {
-                    "name": "loginUrl",
-                    "description": "Login endpoint",
-                    "optional": true,
-                    "optdefault": "'https://login.salesforce.com/'"
-                },
-                {
-                    "name": "proxyUrl",
-                    "description": "Proxy URL. Omit if running on Visualforce or \n                 PhoneGap etc",
-                    "optional": true,
-                    "optdefault": "null"
-                }
-            ],
-            "is_constructor": 1
         }
     },
     "classes": {
-        "vo.MetadataVO": {
-            "name": "vo.MetadataVO",
-            "shortname": "vo.MetadataVO",
+        "Callback": {
+            "name": "Callback",
+            "shortname": "Callback",
             "classitems": [],
             "plugins": [],
             "extensions": [],
             "plugin_for": [],
             "extension_for": [],
-            "module": "SalesforceAjaxToolkit",
+            "module": "JSAsynch",
             "namespace": "",
-            "file": "GE_MobileMap/www/lib/MM_JSSyncEngine/MM_JSSyncEngine.js",
-            "line": 1216,
-            "description": "VO defining structure to use for storing data in Metadata soup"
+            "file": "src/asynch.js",
+            "line": 6,
+            "description": "Object that represents a specific method invocation that can be called at any time\n(or repeatedly) in an agnostic manner."
         },
-        "sforce": {
-            "name": "sforce",
-            "shortname": "sforce",
+        "EmptyCallback": {
+            "name": "EmptyCallback",
+            "shortname": "EmptyCallback",
             "classitems": [],
             "plugins": [],
             "extensions": [],
             "plugin_for": [],
             "extension_for": [],
-            "module": "MM_JSSyncEngine",
+            "module": "JSAsynch",
             "namespace": "",
-            "file": "GE_MobileMap/www/lib/MM_JSSyncEngine/MM_JSSyncEngine.js",
-            "line": 1248,
-            "description": "Salesforce.com AJAX Connector 25.0\nCopyright, 1999, salesforce.com, inc.\nAll Rights Reserved"
+            "file": "src/asynch.js",
+            "line": 77,
+            "description": "Empty callback if a callback must exist but not do anything."
         },
-        "sforce.StringBuffer": {
-            "name": "sforce.StringBuffer",
-            "shortname": "sforce.StringBuffer",
+        "SuccessFailCallback": {
+            "name": "SuccessFailCallback",
+            "shortname": "SuccessFailCallback",
             "classitems": [],
             "plugins": [],
             "extensions": [],
             "plugin_for": [],
             "extension_for": [],
-            "module": "SalesforceAjaxToolkit",
+            "module": "JSAsynch",
             "namespace": "",
-            "file": "GE_MobileMap/www/lib/MM_JSSyncEngine/MM_JSSyncEngine.js",
-            "line": 1268,
-            "description": "StringBuffer"
-        },
-        "sforce.Base64Binary": {
-            "name": "sforce.Base64Binary",
-            "shortname": "sforce.Base64Binary",
-            "classitems": [],
-            "plugins": [],
-            "extensions": [],
-            "plugin_for": [],
-            "extension_for": [],
-            "module": "SalesforceAjaxToolkit",
-            "namespace": "",
-            "file": "GE_MobileMap/www/lib/MM_JSSyncEngine/MM_JSSyncEngine.js",
-            "line": 1287,
-            "params": [
-                {
-                    "name": "text",
-                    "description": ""
-                }
-            ],
-            "is_constructor": 1
-        },
-        "sforce.internal": {
-            "name": "sforce.internal",
-            "shortname": "sforce.internal",
-            "classitems": [],
-            "plugins": [],
-            "extensions": [],
-            "plugin_for": [],
-            "extension_for": [],
-            "module": "SalesforceAjaxToolkit",
-            "namespace": ""
-        },
-        "sforce.Xml": {
-            "name": "sforce.Xml",
-            "shortname": "sforce.Xml",
-            "classitems": [],
-            "plugins": [],
-            "extensions": [],
-            "plugin_for": [],
-            "extension_for": [],
-            "module": "SalesforceAjaxToolkit",
-            "namespace": "",
-            "file": "GE_MobileMap/www/lib/MM_JSSyncEngine/MM_JSSyncEngine.js",
-            "line": 1600,
+            "file": "src/asynch.js",
+            "line": 93,
+            "description": "Object that supports both a success and a failure",
             "is_constructor": 1,
+            "extends": "Callback",
             "params": [
                 {
-                    "name": "name",
+                    "name": "successThis",
                     "description": "",
-                    "type": "String"
+                    "type": "Object"
+                },
+                {
+                    "name": "succcessFn",
+                    "description": "",
+                    "type": "Function"
+                },
+                {
+                    "name": "failureThis",
+                    "description": "",
+                    "type": "Object"
+                },
+                {
+                    "name": "failureFn",
+                    "description": "",
+                    "type": "Function"
                 }
             ]
         },
-        "sforce.XmlWriter": {
-            "name": "sforce.XmlWriter",
-            "shortname": "sforce.XmlWriter",
+        "CountdownCallback": {
+            "name": "CountdownCallback",
+            "shortname": "CountdownCallback",
             "classitems": [],
             "plugins": [],
             "extensions": [],
             "plugin_for": [],
             "extension_for": [],
-            "module": "SalesforceAjaxToolkit",
+            "module": "JSAsynch",
             "namespace": "",
-            "file": "GE_MobileMap/www/lib/MM_JSSyncEngine/MM_JSSyncEngine.js",
-            "line": 2013,
-            "is_constructor": 1
-        },
-        "sforce.XmlReader": {
-            "name": "sforce.XmlReader",
-            "shortname": "sforce.XmlReader",
-            "classitems": [],
-            "plugins": [],
-            "extensions": [],
-            "plugin_for": [],
-            "extension_for": [],
-            "module": "SalesforceAjaxToolkit",
-            "namespace": "",
-            "file": "GE_MobileMap/www/lib/MM_JSSyncEngine/MM_JSSyncEngine.js",
-            "line": 2250,
+            "file": "src/asynch.js",
+            "line": 196,
+            "description": "Object that has a set number of latches. Once all the latches are released",
             "is_constructor": 1,
             "params": [
                 {
-                    "name": "root",
-                    "description": ""
-                }
-            ]
-        },
-        "sforce.SoapTransport": {
-            "name": "sforce.SoapTransport",
-            "shortname": "sforce.SoapTransport",
-            "classitems": [],
-            "plugins": [],
-            "extensions": [],
-            "plugin_for": [],
-            "extension_for": [],
-            "module": "SalesforceAjaxToolkit",
-            "namespace": "",
-            "file": "GE_MobileMap/www/lib/MM_JSSyncEngine/MM_JSSyncEngine.js",
-            "line": 2469
-        },
-        "sforce.SObject": {
-            "name": "sforce.SObject",
-            "shortname": "sforce.SObject",
-            "classitems": [],
-            "plugins": [],
-            "extensions": [],
-            "plugin_for": [],
-            "extension_for": [],
-            "module": "SalesforceAjaxToolkit",
-            "namespace": "",
-            "file": "GE_MobileMap/www/lib/MM_JSSyncEngine/MM_JSSyncEngine.js",
-            "line": 2614
-        },
-        "sforce.LeadConvert": {
-            "name": "sforce.LeadConvert",
-            "shortname": "sforce.LeadConvert",
-            "classitems": [],
-            "plugins": [],
-            "extensions": [],
-            "plugin_for": [],
-            "extension_for": [],
-            "module": "SalesforceAjaxToolkit",
-            "namespace": "",
-            "file": "GE_MobileMap/www/lib/MM_JSSyncEngine/MM_JSSyncEngine.js",
-            "line": 2625
-        },
-        "sforce.MergeRequest": {
-            "name": "sforce.MergeRequest",
-            "shortname": "sforce.MergeRequest",
-            "classitems": [],
-            "plugins": [],
-            "extensions": [],
-            "plugin_for": [],
-            "extension_for": [],
-            "module": "SalesforceAjaxToolkit",
-            "namespace": "",
-            "file": "GE_MobileMap/www/lib/MM_JSSyncEngine/MM_JSSyncEngine.js",
-            "line": 2634
-        },
-        "sforce.Connection": {
-            "name": "sforce.Connection",
-            "shortname": "sforce.Connection",
-            "classitems": [],
-            "plugins": [],
-            "extensions": [],
-            "plugin_for": [],
-            "extension_for": [],
-            "module": "SalesforceAjaxToolkit",
-            "namespace": "",
-            "file": "GE_MobileMap/www/lib/MM_JSSyncEngine/MM_JSSyncEngine.js",
-            "line": 2644
-        },
-        "Network": {
-            "name": "Network",
-            "shortname": "Network",
-            "classitems": [],
-            "plugins": [],
-            "extensions": [],
-            "plugin_for": [],
-            "extension_for": [],
-            "module": "MM_JSSyncEngine",
-            "namespace": "",
-            "file": "GE_MobileMap/www/lib/MM_JSSyncEngine/MM_JSSyncEngine.js",
-            "line": 3265,
-            "description": "Network utility class"
-        },
-        "OfflineQueue": {
-            "name": "OfflineQueue",
-            "shortname": "OfflineQueue",
-            "classitems": [],
-            "plugins": [],
-            "extensions": [],
-            "plugin_for": [],
-            "extension_for": [],
-            "module": "MM_JSSyncEngine",
-            "namespace": "",
-            "file": "GE_MobileMap/www/lib/MM_JSSyncEngine/MM_JSSyncEngine.js",
-            "line": 3345,
-            "description": "OfflineQueue"
-        },
-        "MMSync": {
-            "name": "MMSync",
-            "shortname": "MMSync",
-            "classitems": [],
-            "plugins": [],
-            "extensions": [],
-            "plugin_for": [],
-            "extension_for": [],
-            "module": "MM_JSSyncEngine",
-            "namespace": "",
-            "file": "GE_MobileMap/www/lib/MM_JSSyncEngine/MM_JSSyncEngine.js",
-            "line": 4373,
-            "description": "MMSync engine"
-        },
-        "SObject": {
-            "name": "SObject",
-            "shortname": "SObject",
-            "classitems": [],
-            "plugins": [],
-            "extensions": [],
-            "plugin_for": [],
-            "extension_for": [],
-            "module": "MM_JSSyncEngine",
-            "namespace": "",
-            "file": "GE_MobileMap/www/lib/MM_JSSyncEngine/MM_JSSyncEngine.js",
-            "line": 4970,
-            "description": "SObject VO",
-            "is_constructor": 1
-        },
-        "Util": {
-            "name": "Util",
-            "shortname": "Util",
-            "classitems": [],
-            "plugins": [],
-            "extensions": [],
-            "plugin_for": [],
-            "extension_for": [],
-            "module": "MM_JSSyncEngine",
-            "namespace": "",
-            "file": "GE_MobileMap/www/lib/MM_JSSyncEngine/MM_JSSyncEngine.js",
-            "line": 4985,
-            "is_constructor": 1
-        },
-        "MMJSE_SmartStoreUtil": {
-            "name": "MMJSE_SmartStoreUtil",
-            "shortname": "MMJSE_SmartStoreUtil",
-            "classitems": [],
-            "plugins": [],
-            "extensions": [],
-            "plugin_for": [],
-            "extension_for": [],
-            "module": "MM_JSSyncEngine",
-            "namespace": "",
-            "file": "GE_MobileMap/www/lib/MM_JSSyncEngine/MM_JSSyncEngine.js",
-            "line": 5046
-        },
-        "ForcetkClient": {
-            "name": "ForcetkClient",
-            "shortname": "ForcetkClient",
-            "classitems": [],
-            "plugins": [],
-            "extensions": [],
-            "plugin_for": [],
-            "extension_for": [],
-            "module": "Forcetk",
-            "namespace": "",
-            "file": "GE_MobileMap/www/lib/forcetk.js",
-            "line": 51,
-            "description": "The Client provides a convenient wrapper for the Force.com REST API, \nallowing JavaScript in Visualforce pages to use the API via the Ajax\nProxy."
-        }
-    },
-    "classitems": [
-        {
-            "file": "GE_MobileMap/www/lib/MM_JSSyncEngine/MM_JSSyncEngine.js",
-            "line": 1,
-            "description": "MM JSync library\nversion 1.0.0a",
-            "class": "vo.MetadataVO"
-        },
-        {
-            "file": "GE_MobileMap/www/lib/MM_JSSyncEngine/MM_JSSyncEngine.js",
-            "line": 1263,
-            "itemtype": "property",
-            "name": "internal",
-            "class": "sforce",
-            "module": "SalesforceAjaxToolkit"
-        },
-        {
-            "file": "GE_MobileMap/www/lib/MM_JSSyncEngine/MM_JSSyncEngine.js",
-            "line": 1297,
-            "itemtype": "property",
-            "name": "keystr",
-            "class": "sforce.Base64Binary",
-            "module": "SalesforceAjaxToolkit"
-        },
-        {
-            "file": "GE_MobileMap/www/lib/MM_JSSyncEngine/MM_JSSyncEngine.js",
-            "line": 1303,
-            "itemtype": "method",
-            "name": "toString",
-            "class": "sforce.Base64Binary",
-            "module": "SalesforceAjaxToolkit"
-        },
-        {
-            "file": "GE_MobileMap/www/lib/MM_JSSyncEngine/MM_JSSyncEngine.js",
-            "line": 1332,
-            "itemtype": "method",
-            "name": "decode",
-            "class": "sforce.Base64Binary",
-            "module": "SalesforceAjaxToolkit"
-        },
-        {
-            "file": "GE_MobileMap/www/lib/MM_JSSyncEngine/MM_JSSyncEngine.js",
-            "line": 1371,
-            "itemtype": "method",
-            "name": "dateToString",
-            "class": "sforce.internal",
-            "module": "SalesforceAjaxToolkit"
-        },
-        {
-            "file": "GE_MobileMap/www/lib/MM_JSSyncEngine/MM_JSSyncEngine.js",
-            "line": 1383,
-            "itemtype": "method",
-            "name": "dateTimeToString",
-            "class": "sforce.internal",
-            "module": "SalesforceAjaxToolkit"
-        },
-        {
-            "file": "GE_MobileMap/www/lib/MM_JSSyncEngine/MM_JSSyncEngine.js",
-            "line": 1446,
-            "itemtype": "method",
-            "name": "stringToDate",
-            "class": "sforce.internal",
-            "module": "SalesforceAjaxToolkit"
-        },
-        {
-            "file": "GE_MobileMap/www/lib/MM_JSSyncEngine/MM_JSSyncEngine.js",
-            "line": 1483,
-            "itemtype": "method",
-            "name": "stringToDateTime",
-            "class": "sforce.internal",
-            "module": "SalesforceAjaxToolkit"
-        },
-        {
-            "file": "GE_MobileMap/www/lib/MM_JSSyncEngine/MM_JSSyncEngine.js",
-            "line": 1585,
-            "itemtype": "method",
-            "name": "isDigit",
-            "class": "sforce.internal",
-            "module": "SalesforceAjaxToolkit"
-        },
-        {
-            "file": "GE_MobileMap/www/lib/MM_JSSyncEngine/MM_JSSyncEngine.js",
-            "line": 1610,
-            "itemtype": "method",
-            "name": "toXml",
-            "class": "sforce.Xml",
-            "module": "SalesforceAjaxToolkit"
-        },
-        {
-            "file": "GE_MobileMap/www/lib/MM_JSSyncEngine/MM_JSSyncEngine.js",
-            "line": 1639,
-            "itemtype": "method",
-            "name": "writeValue",
-            "class": "sforce.Xml",
-            "module": "SalesforceAjaxToolkit"
-        },
-        {
-            "file": "GE_MobileMap/www/lib/MM_JSSyncEngine/MM_JSSyncEngine.js",
-            "line": 1659,
-            "itemtype": "method",
-            "name": "get",
-            "class": "sforce.Xml",
-            "module": "SalesforceAjaxToolkit"
-        },
-        {
-            "file": "GE_MobileMap/www/lib/MM_JSSyncEngine/MM_JSSyncEngine.js",
-            "line": 1667,
-            "itemtype": "method",
-            "name": "set",
-            "class": "sforce.Xml",
-            "module": "SalesforceAjaxToolkit"
-        },
-        {
-            "file": "GE_MobileMap/www/lib/MM_JSSyncEngine/MM_JSSyncEngine.js",
-            "line": 1675,
-            "itemtype": "method",
-            "name": "getArray",
-            "class": "sforce.Xml",
-            "module": "SalesforceAjaxToolkit"
-        },
-        {
-            "file": "GE_MobileMap/www/lib/MM_JSSyncEngine/MM_JSSyncEngine.js",
-            "line": 1692,
-            "itemtype": "method",
-            "name": "getBoolean",
-            "class": "sforce.Xml",
-            "module": "SalesforceAjaxToolkit"
-        },
-        {
-            "file": "GE_MobileMap/www/lib/MM_JSSyncEngine/MM_JSSyncEngine.js",
-            "line": 1700,
-            "itemtype": "method",
-            "name": "getDate",
-            "class": "sforce.Xml",
-            "module": "SalesforceAjaxToolkit"
-        },
-        {
-            "file": "GE_MobileMap/www/lib/MM_JSSyncEngine/MM_JSSyncEngine.js",
-            "line": 1716,
-            "itemtype": "method",
-            "name": "getDateTime",
-            "class": "sforce.Xml",
-            "module": "SalesforceAjaxToolkit"
-        },
-        {
-            "file": "GE_MobileMap/www/lib/MM_JSSyncEngine/MM_JSSyncEngine.js",
-            "line": 1732,
-            "itemtype": "method",
-            "name": "getInt",
-            "class": "sforce.Xml",
-            "module": "SalesforceAjaxToolkit"
-        },
-        {
-            "file": "GE_MobileMap/www/lib/MM_JSSyncEngine/MM_JSSyncEngine.js",
-            "line": 1748,
-            "itemtype": "method",
-            "name": "getFloat",
-            "class": "sforce.Xml",
-            "module": "SalesforceAjaxToolkit"
-        },
-        {
-            "file": "GE_MobileMap/www/lib/MM_JSSyncEngine/MM_JSSyncEngine.js",
-            "line": 1764,
-            "itemtype": "method",
-            "name": "getBase64Binary",
-            "class": "sforce.Xml",
-            "module": "SalesforceAjaxToolkit"
-        },
-        {
-            "file": "GE_MobileMap/www/lib/MM_JSSyncEngine/MM_JSSyncEngine.js",
-            "line": 1776,
-            "itemtype": "method",
-            "name": "toString",
-            "class": "sforce.Xml",
-            "module": "SalesforceAjaxToolkit"
-        },
-        {
-            "file": "GE_MobileMap/www/lib/MM_JSSyncEngine/MM_JSSyncEngine.js",
-            "line": 1816,
-            "itemtype": "method",
-            "name": "Debug",
-            "class": "sforce.internal",
-            "module": "SalesforceAjaxToolkit"
-        },
-        {
-            "file": "GE_MobileMap/www/lib/MM_JSSyncEngine/MM_JSSyncEngine.js",
-            "line": 1911,
-            "itemtype": "property",
-            "name": "debug",
-            "class": "sforce.internal",
-            "module": "SalesforceAjaxToolkit"
-        },
-        {
-            "file": "GE_MobileMap/www/lib/MM_JSSyncEngine/MM_JSSyncEngine.js",
-            "line": 1926,
-            "itemtype": "method",
-            "name": "Transport",
-            "params": [
-                {
-                    "name": "url",
+                    "name": "latchCount",
                     "description": "",
-                    "type": "String"
-                }
-            ],
-            "class": "sforce.internal",
-            "module": "SalesforceAjaxToolkit"
-        },
-        {
-            "file": "GE_MobileMap/www/lib/MM_JSSyncEngine/MM_JSSyncEngine.js",
-            "line": 2025,
-            "itemtype": "method",
-            "name": "writeStartElement",
-            "class": "sforce.XmlWriter",
-            "module": "SalesforceAjaxToolkit"
-        },
-        {
-            "file": "GE_MobileMap/www/lib/MM_JSSyncEngine/MM_JSSyncEngine.js",
-            "line": 2055,
-            "itemtype": "method",
-            "name": "writeEndElement",
-            "class": "sforce.XmlWriter",
-            "module": "SalesforceAjaxToolkit"
-        },
-        {
-            "file": "GE_MobileMap/www/lib/MM_JSSyncEngine/MM_JSSyncEngine.js",
-            "line": 2077,
-            "itemtype": "method",
-            "name": "writeNamespace",
-            "class": "sforce.XmlWriter",
-            "module": "SalesforceAjaxToolkit"
-        },
-        {
-            "file": "GE_MobileMap/www/lib/MM_JSSyncEngine/MM_JSSyncEngine.js",
-            "line": 2097,
-            "itemtype": "method",
-            "name": "writeText",
-            "class": "sforce.XmlWriter",
-            "module": "SalesforceAjaxToolkit"
-        },
-        {
-            "file": "GE_MobileMap/www/lib/MM_JSSyncEngine/MM_JSSyncEngine.js",
-            "line": 2117,
-            "itemtype": "method",
-            "name": "writeXsiType",
-            "class": "sforce.XmlWriter",
-            "module": "SalesforceAjaxToolkit"
-        },
-        {
-            "file": "GE_MobileMap/www/lib/MM_JSSyncEngine/MM_JSSyncEngine.js",
-            "line": 2126,
-            "itemtype": "method",
-            "name": "writeAttribute",
-            "class": "sforce.XmlWriter",
-            "module": "SalesforceAjaxToolkit"
-        },
-        {
-            "file": "GE_MobileMap/www/lib/MM_JSSyncEngine/MM_JSSyncEngine.js",
-            "line": 2134,
-            "itemtype": "method",
-            "name": "getPrefix",
-            "class": "sforce.XmlWriter",
-            "module": "SalesforceAjaxToolkit"
-        },
-        {
-            "file": "GE_MobileMap/www/lib/MM_JSSyncEngine/MM_JSSyncEngine.js",
-            "line": 2151,
-            "itemtype": "method",
-            "name": "toString",
-            "class": "sforce.XmlWriter",
-            "module": "SalesforceAjaxToolkit"
-        },
-        {
-            "file": "GE_MobileMap/www/lib/MM_JSSyncEngine/MM_JSSyncEngine.js",
-            "line": 2159,
-            "itemtype": "property",
-            "name": "soapNS",
-            "class": "sforce.XmlWriter",
-            "module": "SalesforceAjaxToolkit"
-        },
-        {
-            "file": "GE_MobileMap/www/lib/MM_JSSyncEngine/MM_JSSyncEngine.js",
-            "line": 2165,
-            "itemtype": "method",
-            "name": "startEnvelope",
-            "class": "sforce.XmlWriter",
-            "module": "SalesforceAjaxToolkit"
-        },
-        {
-            "file": "GE_MobileMap/www/lib/MM_JSSyncEngine/MM_JSSyncEngine.js",
-            "line": 2173,
-            "itemtype": "method",
-            "name": "endEnvelope",
-            "class": "sforce.XmlWriter",
-            "module": "SalesforceAjaxToolkit"
-        },
-        {
-            "file": "GE_MobileMap/www/lib/MM_JSSyncEngine/MM_JSSyncEngine.js",
-            "line": 2181,
-            "itemtype": "method",
-            "name": "startHeader",
-            "class": "sforce.XmlWriter",
-            "module": "SalesforceAjaxToolkit"
-        },
-        {
-            "file": "GE_MobileMap/www/lib/MM_JSSyncEngine/MM_JSSyncEngine.js",
-            "line": 2189,
-            "itemtype": "method",
-            "name": "endHeader",
-            "class": "sforce.XmlWriter",
-            "module": "SalesforceAjaxToolkit"
-        },
-        {
-            "file": "GE_MobileMap/www/lib/MM_JSSyncEngine/MM_JSSyncEngine.js",
-            "line": 2197,
-            "itemtype": "method",
-            "name": "startBody",
-            "class": "sforce.XmlWriter",
-            "module": "SalesforceAjaxToolkit"
-        },
-        {
-            "file": "GE_MobileMap/www/lib/MM_JSSyncEngine/MM_JSSyncEngine.js",
-            "line": 2205,
-            "itemtype": "method",
-            "name": "endBody",
-            "class": "sforce.XmlWriter",
-            "module": "SalesforceAjaxToolkit"
-        },
-        {
-            "file": "GE_MobileMap/www/lib/MM_JSSyncEngine/MM_JSSyncEngine.js",
-            "line": 2213,
-            "itemtype": "method",
-            "name": "writeNameValueNode",
-            "class": "sforce.XmlWriter",
-            "module": "SalesforceAjaxToolkit"
-        },
-        {
-            "file": "GE_MobileMap/www/lib/MM_JSSyncEngine/MM_JSSyncEngine.js",
-            "line": 2260,
-            "itemtype": "method",
-            "name": "getEnvelope",
-            "class": "sforce.XmlReader",
-            "module": "SalesforceAjaxToolkit"
-        },
-        {
-            "file": "GE_MobileMap/www/lib/MM_JSSyncEngine/MM_JSSyncEngine.js",
-            "line": 2271,
-            "itemtype": "method",
-            "name": "getBody",
-            "class": "sforce.XmlReader",
-            "module": "SalesforceAjaxToolkit"
-        },
-        {
-            "file": "GE_MobileMap/www/lib/MM_JSSyncEngine/MM_JSSyncEngine.js",
-            "line": 2279,
-            "itemtype": "method",
-            "name": "getHeader",
-            "class": "sforce.XmlReader",
-            "module": "SalesforceAjaxToolkit"
-        },
-        {
-            "file": "GE_MobileMap/www/lib/MM_JSSyncEngine/MM_JSSyncEngine.js",
-            "line": 2287,
-            "itemtype": "method",
-            "name": "getChild",
-            "class": "sforce.XmlReader",
-            "module": "SalesforceAjaxToolkit"
-        },
-        {
-            "file": "GE_MobileMap/www/lib/MM_JSSyncEngine/MM_JSSyncEngine.js",
-            "line": 2301,
-            "itemtype": "method",
-            "name": "getFirstElement",
-            "class": "sforce.XmlReader",
-            "module": "SalesforceAjaxToolkit"
-        },
-        {
-            "file": "GE_MobileMap/www/lib/MM_JSSyncEngine/MM_JSSyncEngine.js",
-            "line": 2315,
-            "itemtype": "method",
-            "name": "isTag",
-            "class": "sforce.XmlReader",
-            "module": "SalesforceAjaxToolkit"
-        },
-        {
-            "file": "GE_MobileMap/www/lib/MM_JSSyncEngine/MM_JSSyncEngine.js",
-            "line": 2330,
-            "itemtype": "method",
-            "name": "isNameValueNode",
-            "class": "sforce.XmlReader",
-            "module": "SalesforceAjaxToolkit"
-        },
-        {
-            "file": "GE_MobileMap/www/lib/MM_JSSyncEngine/MM_JSSyncEngine.js",
-            "line": 2345,
-            "itemtype": "method",
-            "name": "getTextValue",
-            "class": "sforce.XmlReader",
-            "module": "SalesforceAjaxToolkit"
-        },
-        {
-            "file": "GE_MobileMap/www/lib/MM_JSSyncEngine/MM_JSSyncEngine.js",
-            "line": 2372,
-            "itemtype": "method",
-            "name": "toXmlObject2",
-            "class": "sforce.XmlReader",
-            "module": "SalesforceAjaxToolkit"
-        },
-        {
-            "file": "GE_MobileMap/www/lib/MM_JSSyncEngine/MM_JSSyncEngine.js",
-            "line": 2399,
-            "itemtype": "method",
-            "name": "toXmlObject",
-            "class": "sforce.XmlReader",
-            "module": "SalesforceAjaxToolkit"
-        },
-        {
-            "file": "GE_MobileMap/www/lib/MM_JSSyncEngine/MM_JSSyncEngine.js",
-            "line": 2481,
-            "itemtype": "method",
-            "name": "onFailure",
-            "class": "sforce.SoapTransport",
-            "module": "SalesforceAjaxToolkit"
-        },
-        {
-            "file": "GE_MobileMap/www/lib/MM_JSSyncEngine/MM_JSSyncEngine.js",
-            "line": 2491,
-            "itemtype": "method",
-            "name": "send",
-            "class": "sforce.SoapTransport",
-            "module": "SalesforceAjaxToolkit"
-        },
-        {
-            "file": "GE_MobileMap/www/lib/MM_JSSyncEngine/MM_JSSyncEngine.js",
-            "line": 2511,
-            "itemtype": "event",
-            "name": "httpCallback",
-            "class": "sforce.SoapTransport",
-            "module": "SalesforceAjaxToolkit"
-        },
-        {
-            "file": "GE_MobileMap/www/lib/MM_JSSyncEngine/MM_JSSyncEngine.js",
-            "line": 2581,
-            "itemtype": "event",
-            "name": "sendFault",
-            "class": "sforce.SoapTransport",
-            "module": "SalesforceAjaxToolkit"
-        },
-        {
-            "file": "GE_MobileMap/www/lib/MM_JSSyncEngine/MM_JSSyncEngine.js",
-            "line": 2602,
-            "itemtype": "event",
-            "name": "beforeCallback",
-            "class": "sforce.SoapTransport",
-            "module": "SalesforceAjaxToolkit"
-        },
-        {
-            "file": "GE_MobileMap/www/lib/MM_JSSyncEngine/MM_JSSyncEngine.js",
-            "line": 2608,
-            "itemtype": "event",
-            "name": "afterCallback",
-            "class": "sforce.SoapTransport",
-            "module": "SalesforceAjaxToolkit"
-        },
-        {
-            "file": "GE_MobileMap/www/lib/MM_JSSyncEngine/MM_JSSyncEngine.js",
-            "line": 3304,
-            "description": "Initialize network object\nChecks initial network status and adds listeners for offline and online changes",
-            "itemtype": "method",
-            "name": "initialize",
-            "class": "Network",
-            "module": "MM_JSSyncEngine"
-        },
-        {
-            "file": "GE_MobileMap/www/lib/MM_JSSyncEngine/MM_JSSyncEngine.js",
-            "line": 3319,
-            "description": "Check the network status and set the Network object (this object) isConnected status.\nIf callback methods exist in this Network object for offline or online changes call those.",
-            "itemtype": "method",
-            "name": "handleNetworkStatusChange",
-            "class": "Network",
-            "module": "MM_JSSyncEngine"
-        },
-        {
-            "file": "GE_MobileMap/www/lib/MM_JSSyncEngine/MM_JSSyncEngine.js",
-            "line": 3358,
-            "description": "Queue for later upload",
-            "itemtype": "method",
-            "name": "QueueRecords",
-            "params": [
-                {
-                    "name": "records",
-                    "description": "",
-                    "type": "Array"
-                },
-                {
-                    "name": "callback",
-                    "description": "",
-                    "type": "Function"
-                },
-                {
-                    "name": "error",
-                    "description": "",
-                    "type": "Object"
-                }
-            ],
-            "class": "OfflineQueue",
-            "module": "MM_JSSyncEngine"
-        },
-        {
-            "file": "GE_MobileMap/www/lib/MM_JSSyncEngine/MM_JSSyncEngine.js",
-            "line": 3376,
-            "description": "Upload/delete Queue to Salesforce",
-            "itemtype": "method",
-            "name": "UploadQueue",
-            "params": [
-                {
-                    "name": "callback",
-                    "description": "",
-                    "type": "Function"
-                },
-                {
-                    "name": "error",
-                    "description": "",
-                    "type": "Object"
-                }
-            ],
-            "class": "OfflineQueue",
-            "module": "MM_JSSyncEngine"
-        },
-        {
-            "file": "GE_MobileMap/www/lib/MM_JSSyncEngine/MM_JSSyncEngine.js",
-            "line": 3581,
-            "description": "Load records with Name from Queue",
-            "itemtype": "method",
-            "name": "LoadRecordsFromQueue",
-            "params": [
-                {
-                    "name": "syncJsonObj",
-                    "description": "- sync object from sync.json",
-                    "type": "SyncObj"
-                },
-                {
-                    "name": "callback",
-                    "description": "",
-                    "type": "Function"
-                },
-                {
-                    "name": "error",
-                    "description": "",
-                    "type": "Object"
-                }
-            ],
-            "class": "OfflineQueue",
-            "module": "MM_JSSyncEngine"
-        },
-        {
-            "file": "GE_MobileMap/www/lib/MM_JSSyncEngine/MM_JSSyncEngine.js",
-            "line": 3611,
-            "description": "this function will update the record in DB and call the Queue function\nnote: accepts only single record for queue",
-            "itemtype": "method",
-            "name": "StoreRecords",
-            "params": [
-                {
-                    "name": "records",
-                    "description": "",
-                    "type": "Array"
-                },
-                {
-                    "name": "callback",
-                    "description": "",
-                    "type": "Function"
-                },
-                {
-                    "name": "error",
-                    "description": "",
-                    "type": "Object"
-                }
-            ],
-            "class": "OfflineQueue",
-            "module": "MM_JSSyncEngine"
-        },
-        {
-            "file": "GE_MobileMap/www/lib/MM_JSSyncEngine/MM_JSSyncEngine.js",
-            "line": 3655,
-            "description": "Register the Queue soup if it doesn't already exist",
-            "itemtype": "method",
-            "name": "RegisterQueueSoup",
-            "params": [
-                {
-                    "name": "callback",
-                    "description": "",
-                    "type": "Function"
-                },
-                {
-                    "name": "error",
-                    "description": "",
-                    "type": "Object"
-                }
-            ],
-            "class": "OfflineQueue",
-            "module": "MM_JSSyncEngine"
-        },
-        {
-            "file": "GE_MobileMap/www/lib/MM_JSSyncEngine/MM_JSSyncEngine.js",
-            "line": 3687,
-            "description": "Create Queue to store metadata for each object",
-            "itemtype": "method",
-            "name": "createMetadataSoup",
-            "params": [
-                {
-                    "name": "callback",
-                    "description": "",
-                    "type": "Function"
-                },
-                {
-                    "name": "error",
-                    "description": "",
-                    "type": "Object"
-                }
-            ],
-            "class": "OfflineQueue",
-            "module": "MM_JSSyncEngine"
-        },
-        {
-            "file": "GE_MobileMap/www/lib/MM_JSSyncEngine/MM_JSSyncEngine.js",
-            "line": 3734,
-            "description": "Write metadata record to Metadata",
-            "itemtype": "method",
-            "name": "cacheMeta",
-            "params": [
-                {
-                    "name": "sobj",
-                    "description": "",
-                    "type": "Object"
-                },
-                {
-                    "name": "metadataVo",
-                    "description": "",
-                    "type": "Object"
-                },
-                {
-                    "name": "callbackSuccess",
-                    "description": "",
-                    "type": "Function"
-                },
-                {
-                    "name": "callbackFail",
-                    "description": "",
-                    "type": "Function"
-                }
-            ],
-            "class": "OfflineQueue",
-            "module": "MM_JSSyncEngine"
-        },
-        {
-            "file": "GE_MobileMap/www/lib/MM_JSSyncEngine/MM_JSSyncEngine.js",
-            "line": 3749,
-            "description": "Update LastSync to Metadata",
-            "itemtype": "method",
-            "name": "updateTimestamp",
-            "params": [
-                {
-                    "name": "sobj",
-                    "description": "",
-                    "type": "Object"
-                },
-                {
-                    "name": "time",
-                    "description": "",
-                    "type": "DateTime"
-                },
-                {
-                    "name": "metadata",
-                    "description": "",
-                    "type": "Object"
-                },
-                {
-                    "name": "callback",
-                    "description": "",
-                    "type": "Function"
-                }
-            ],
-            "class": "OfflineQueue",
-            "module": "MM_JSSyncEngine"
-        },
-        {
-            "file": "GE_MobileMap/www/lib/MM_JSSyncEngine/MM_JSSyncEngine.js",
-            "line": 3775,
-            "description": "Get single metadata objects from Metadata soup",
-            "itemtype": "method",
-            "name": "getMetadataFromSoup",
-            "params": [
-                {
-                    "name": "objName",
-                    "description": "",
-                    "type": "String"
-                },
-                {
-                    "name": "callback",
-                    "description": "",
-                    "type": "Function"
-                },
-                {
-                    "name": "errorHandler",
-                    "description": "",
-                    "type": "Function"
-                }
-            ],
-            "class": "OfflineQueue",
-            "module": "MM_JSSyncEngine"
-        },
-        {
-            "file": "GE_MobileMap/www/lib/MM_JSSyncEngine/MM_JSSyncEngine.js",
-            "line": 3800,
-            "description": "Get ALL metadata objects from Metadata soup",
-            "itemtype": "method",
-            "name": "getAllMetadataFromSoup",
-            "params": [
-                {
-                    "name": "expectedRecords",
-                    "description": "",
-                    "type": "Array"
-                },
-                {
-                    "name": "callback",
-                    "description": "",
-                    "type": "Function"
-                },
-                {
-                    "name": "errorHandler",
-                    "description": "",
-                    "type": "Function"
-                }
-            ],
-            "class": "OfflineQueue",
-            "module": "MM_JSSyncEngine"
-        },
-        {
-            "file": "GE_MobileMap/www/lib/MM_JSSyncEngine/MM_JSSyncEngine.js",
-            "line": 3821,
-            "description": "Get actual entries returned from soup via cursor",
-            "itemtype": "method",
-            "name": "handleGetAllEntriesFromSoup",
-            "params": [
-                {
-                    "name": "cursor",
-                    "description": "",
-                    "type": "Cursor"
-                }
-            ],
-            "class": "OfflineQueue",
-            "module": "MM_JSSyncEngine"
-        },
-        {
-            "file": "GE_MobileMap/www/lib/MM_JSSyncEngine/MM_JSSyncEngine.js",
-            "line": 3847,
-            "description": "Take the array of objects passed in from json.sync and created soups for each",
-            "itemtype": "method",
-            "name": "createObjectSoups",
-            "params": [
-                {
-                    "name": "syncObjects",
-                    "description": "",
-                    "type": "Array<SyncObject>"
-                },
-                {
-                    "name": "callback",
-                    "description": "",
-                    "type": "Function"
-                },
-                {
-                    "name": "error",
-                    "description": "",
-                    "type": "Object"
-                }
-            ],
-            "class": "OfflineQueue",
-            "module": "MM_JSSyncEngine"
-        },
-        {
-            "file": "GE_MobileMap/www/lib/MM_JSSyncEngine/MM_JSSyncEngine.js",
-            "line": 3866,
-            "description": "Create soup for a particular Salesforce object based on json.sync settings",
-            "itemtype": "method",
-            "name": "createObjectSoup",
-            "params": [
-                {
-                    "name": "soupDetails",
-                    "description": "",
-                    "type": "Object"
-                },
-                {
-                    "name": "callback",
-                    "description": "",
-                    "type": "Function"
-                }
-            ],
-            "class": "OfflineQueue",
-            "module": "MM_JSSyncEngine"
-        },
-        {
-            "file": "GE_MobileMap/www/lib/MM_JSSyncEngine/MM_JSSyncEngine.js",
-            "line": 3917,
-            "description": "Increment total number of created soups and make callback if all sf object queues are creates",
-            "itemtype": "method",
-            "name": "completeObjectSoup",
-            "params": [
-                {
-                    "name": "completeObj",
-                    "description": "",
-                    "type": "Object"
-                },
-                {
-                    "name": "callback",
-                    "description": "",
-                    "type": "Function"
-                }
-            ],
-            "class": "OfflineQueue",
-            "module": "MM_JSSyncEngine"
-        },
-        {
-            "file": "GE_MobileMap/www/lib/MM_JSSyncEngine/MM_JSSyncEngine.js",
-            "line": 3940,
-            "description": "Log error if creation of a soup occurs",
-            "itemtype": "method",
-            "name": "handleSoupCreateError",
-            "access": "protected",
-            "tagname": "",
-            "params": [
-                {
-                    "name": "e",
-                    "description": "",
-                    "type": "Object"
-                },
-                {
-                    "name": "soupName",
-                    "description": "",
-                    "type": "String"
-                }
-            ],
-            "class": "OfflineQueue",
-            "module": "MM_JSSyncEngine"
-        },
-        {
-            "file": "GE_MobileMap/www/lib/MM_JSSyncEngine/MM_JSSyncEngine.js",
-            "line": 3956,
-            "description": "Write records to local smartstore soup",
-            "itemtype": "method",
-            "name": "cacheToLocal",
-            "params": [
-                {
-                    "name": "sobj",
-                    "description": "",
-                    "type": "Object"
-                },
-                {
-                    "name": "records",
-                    "description": "",
-                    "type": "Array"
-                },
-                {
-                    "name": "callbackSuccess",
-                    "description": "",
-                    "type": "Function"
-                },
-                {
-                    "name": "callbackFail",
-                    "description": "",
-                    "type": "Function"
-                }
-            ],
-            "class": "OfflineQueue",
-            "module": "MM_JSSyncEngine"
-        },
-        {
-            "file": "GE_MobileMap/www/lib/MM_JSSyncEngine/MM_JSSyncEngine.js",
-            "line": 3969,
-            "description": "Check the queue record whether the queue record has to be upserted or deleted\\",
-            "itemtype": "method",
-            "name": "checkIfQueueIsForDelete",
-            "params": [
-                {
-                    "name": "QueueRecord",
-                    "description": "",
-                    "type": "Object"
-                }
-            ],
-            "return": {
-                "description": "true/false"
-            },
-            "class": "OfflineQueue",
-            "module": "MM_JSSyncEngine"
-        },
-        {
-            "file": "GE_MobileMap/www/lib/MM_JSSyncEngine/MM_JSSyncEngine.js",
-            "line": 3985,
-            "description": "Delete the record from SFDC based on queue record Id and sync.json settings",
-            "itemtype": "method",
-            "name": "runSFDCDeleteQuery",
-            "params": [
-                {
-                    "name": "QueueRecord",
-                    "description": "",
-                    "type": "Object"
-                },
-                {
-                    "name": "callback",
-                    "description": "",
-                    "type": "Function"
-                },
-                {
-                    "name": "onError",
-                    "description": "",
-                    "type": "Function"
-                }
-            ],
-            "class": "OfflineQueue",
-            "module": "MM_JSSyncEngine"
-        },
-        {
-            "file": "GE_MobileMap/www/lib/MM_JSSyncEngine/MM_JSSyncEngine.js",
-            "line": 4011,
-            "description": "Delete the record from SFDC based on queue record Id and sync.json settings using batch processing",
-            "itemtype": "method",
-            "name": "runSFDCDeleteQueryUsingBatch",
-            "params": [
-                {
-                    "name": "deleteRecordsArray",
-                    "description": "",
-                    "type": "Array"
-                },
-                {
-                    "name": "callback",
-                    "description": "",
-                    "type": "Function"
-                },
-                {
-                    "name": "errorCallback",
-                    "description": "",
-                    "type": "Function"
-                }
-            ],
-            "class": "OfflineQueue",
-            "module": "MM_JSSyncEngine"
-        },
-        {
-            "file": "GE_MobileMap/www/lib/MM_JSSyncEngine/MM_JSSyncEngine.js",
-            "line": 4073,
-            "description": "Delete the record from it's Object soup then call StoreReocrd to save delete to Queue and if online, remove from SFDC",
-            "itemtype": "method",
-            "name": "deleteFromObjectSoup",
-            "params": [
-                {
-                    "name": "jsonObj",
-                    "description": "",
-                    "type": "Object"
-                },
-                {
-                    "name": "callback",
-                    "description": "",
-                    "type": "Function"
-                },
-                {
-                    "name": "onError",
-                    "description": "",
-                    "type": "Function"
-                }
-            ],
-            "class": "OfflineQueue",
-            "module": "MM_JSSyncEngine"
-        },
-        {
-            "file": "GE_MobileMap/www/lib/MM_JSSyncEngine/MM_JSSyncEngine.js",
-            "line": 4090,
-            "description": "Upsert to SFDC based on queue record Id and sync.json settings",
-            "itemtype": "method",
-            "name": "runSFDCUpsertQuery",
-            "params": [
-                {
-                    "name": "queueRecord",
-                    "description": "",
-                    "type": "Object"
-                },
-                {
-                    "name": "syncJsonObjs",
-                    "description": "",
-                    "type": "Array<Object>"
-                },
-                {
-                    "name": "callback",
-                    "description": "",
-                    "type": "Function"
-                },
-                {
-                    "name": "errorCallback",
-                    "description": "",
-                    "type": "Function"
-                }
-            ],
-            "class": "OfflineQueue",
-            "module": "MM_JSSyncEngine"
-        },
-        {
-            "file": "GE_MobileMap/www/lib/MM_JSSyncEngine/MM_JSSyncEngine.js",
-            "line": 4147,
-            "description": "Upsert to SFDC based on queue record Id and sync.json settings using batch processing",
-            "itemtype": "method",
-            "name": "runSFDCUpsertQueryUsingBatch",
-            "params": [
-                {
-                    "name": "upsertRecordsArray",
-                    "description": "",
-                    "type": "Array<Object>"
-                },
-                {
-                    "name": "syncJsonObjs",
-                    "description": "",
-                    "type": "Array<Object>"
-                },
-                {
-                    "name": "callback",
-                    "description": "",
-                    "type": "Function"
-                }
-            ],
-            "class": "OfflineQueue",
-            "module": "MM_JSSyncEngine"
-        },
-        {
-            "file": "GE_MobileMap/www/lib/MM_JSSyncEngine/MM_JSSyncEngine.js",
-            "line": 4191,
-            "description": "Builds Field Query for Batches",
-            "itemtype": "method",
-            "name": "buildFieldQueryForBatch",
-            "access": "protected",
-            "tagname": "",
-            "params": [
-                {
-                    "name": "queueRecords",
-                    "description": "",
-                    "type": "Array<Object>"
-                },
-                {
-                    "name": "syncJsonObjs",
-                    "description": "",
-                    "type": "Array<Object>"
-                }
-            ],
-            "class": "OfflineQueue",
-            "module": "MM_JSSyncEngine"
-        },
-        {
-            "file": "GE_MobileMap/www/lib/MM_JSSyncEngine/MM_JSSyncEngine.js",
-            "line": 4254,
-            "description": "This is method will return the fields to be upserted in field:value format based on sync.json settings",
-            "itemtype": "method",
-            "name": "buildFieldQuery",
-            "access": "protected",
-            "tagname": "",
-            "params": [
-                {
-                    "name": "queueRecord",
-                    "description": "",
-                    "type": "Object"
-                },
-                {
-                    "name": "syncJsonObjs",
-                    "description": "",
-                    "type": "Array<Object>"
-                }
-            ],
-            "class": "OfflineQueue",
-            "module": "MM_JSSyncEngine"
-        },
-        {
-            "file": "GE_MobileMap/www/lib/MM_JSSyncEngine/MM_JSSyncEngine.js",
-            "line": 4309,
-            "description": "CREATE DESCRIPTION",
-            "itemtype": "method",
-            "name": "enqueueRecords",
-            "note": ": this function may not be needed",
-            "todo": [
-                ": if not used remove it"
-            ],
-            "params": [
-                {
-                    "name": "records",
-                    "description": "",
-                    "type": "Array<Object>"
-                },
-                {
-                    "name": "successCB",
-                    "description": "",
-                    "type": "Function"
-                },
-                {
-                    "name": "errorCB",
-                    "description": "",
-                    "type": "Function"
-                }
-            ],
-            "class": "OfflineQueue",
-            "module": "MM_JSSyncEngine"
-        },
-        {
-            "file": "GE_MobileMap/www/lib/MM_JSSyncEngine/MM_JSSyncEngine.js",
-            "line": 4340,
-            "description": "CREATE DESCRIPTION",
-            "itemtype": "method",
-            "name": "fetchObjectList",
-            "params": [
-                {
-                    "name": "objectName",
-                    "description": "",
-                    "type": "String"
-                },
-                {
-                    "name": "pageSize",
-                    "description": "",
-                    "type": "Integer"
-                },
-                {
-                    "name": "callback",
-                    "description": "",
-                    "type": "Function"
-                },
-                {
-                    "name": "errorCallback",
-                    "description": "",
-                    "type": "Function"
-                }
-            ],
-            "class": "OfflineQueue",
-            "module": "MM_JSSyncEngine"
-        },
-        {
-            "file": "GE_MobileMap/www/lib/MM_JSSyncEngine/MM_JSSyncEngine.js",
-            "line": 4411,
-            "description": "Initialize Model Metrics Synchronization Engine",
-            "itemtype": "method",
-            "name": "initialize",
-            "params": [
-                {
-                    "name": "forceResync",
-                    "description": ""
-                }
-            ],
-            "class": "MMSync",
-            "module": "MM_JSSyncEngine"
-        },
-        {
-            "file": "GE_MobileMap/www/lib/MM_JSSyncEngine/MM_JSSyncEngine.js",
-            "line": 4444,
-            "description": "Read/set sync JSON and kick off creation of Metadata queue soupd and smartstore Object soups",
-            "itemtype": "method",
-            "name": "readSyncJSON",
-            "class": "MMSync",
-            "module": "MM_JSSyncEngine"
-        },
-        {
-            "file": "GE_MobileMap/www/lib/MM_JSSyncEngine/MM_JSSyncEngine.js",
-            "line": 4493,
-            "description": "Check to see if phonegap smartstore plugin is available",
-            "itemtype": "method",
-            "name": "hasSmartstore",
-            "class": "MMSync",
-            "module": "MM_JSSyncEngine"
-        },
-        {
-            "file": "GE_MobileMap/www/lib/MM_JSSyncEngine/MM_JSSyncEngine.js",
-            "line": 4505,
-            "description": "Handler for once all soups are created or are determined to already exist. Starts actual synchronization process if online.",
-            "access": "protected",
-            "tagname": "",
-            "itemtype": "method",
-            "name": "handleSoupsCreated",
-            "class": "MMSync",
-            "module": "MM_JSSyncEngine"
-        },
-        {
-            "file": "GE_MobileMap/www/lib/MM_JSSyncEngine/MM_JSSyncEngine.js",
-            "line": 4536,
-            "description": "Handler for response from forceTK describe calls. Calls sync if all describes are complete to request data.",
-            "access": "protected",
-            "tagname": "",
-            "itemtype": "method",
-            "name": "handleDescribeResponse",
-            "params": [
-                {
-                    "name": "response",
-                    "description": ""
-                }
-            ],
-            "class": "MMSync",
-            "module": "MM_JSSyncEngine"
-        },
-        {
-            "file": "GE_MobileMap/www/lib/MM_JSSyncEngine/MM_JSSyncEngine.js",
-            "line": 4594,
-            "description": "Runs OfflineQueue method to push all local data to Salesforce.com based on json.sync.objects definitions\ncallback is required",
-            "class": "MMSync",
-            "module": "MM_JSSyncEngine"
-        },
-        {
-            "file": "GE_MobileMap/www/lib/MM_JSSyncEngine/MM_JSSyncEngine.js",
-            "line": 4616,
-            "description": "Builds sync status screen based on json.sync.objects definitions then pulls data from \nSalesforce.com based on json.sync.objects definitions\ncallback is optional",
-            "itemtype": "method",
-            "name": "sync",
-            "class": "MMSync",
-            "module": "MM_JSSyncEngine"
-        },
-        {
-            "file": "GE_MobileMap/www/lib/MM_JSSyncEngine/MM_JSSyncEngine.js",
-            "line": 4657,
-            "description": "Syncs an object",
-            "itemtype": "method",
-            "name": "syncObject",
-            "params": [
-                {
-                    "name": "so",
-                    "description": "- sync.json SyncObject",
-                    "type": "SyncObject"
-                }
-            ],
-            "class": "MMSync",
-            "module": "MM_JSSyncEngine"
-        },
-        {
-            "file": "GE_MobileMap/www/lib/MM_JSSyncEngine/MM_JSSyncEngine.js",
-            "line": 4691,
-            "description": "Get last updates from Metadata soup if available",
-            "itemtype": "method",
-            "name": "getLastUpdates",
-            "params": [
-                {
-                    "name": "callback",
-                    "description": "",
-                    "type": "Function"
-                }
-            ],
-            "class": "MMSync",
-            "module": "MM_JSSyncEngine"
-        },
-        {
-            "file": "GE_MobileMap/www/lib/MM_JSSyncEngine/MM_JSSyncEngine.js",
-            "line": 4719,
-            "description": "Handler for meta soup errors",
-            "access": "protected",
-            "tagname": "",
-            "itemtype": "method",
-            "name": "handleMetaSoupError",
-            "params": [
-                {
-                    "name": "error",
-                    "description": ""
-                }
-            ],
-            "class": "MMSync",
-            "module": "MM_JSSyncEngine"
-        },
-        {
-            "file": "GE_MobileMap/www/lib/MM_JSSyncEngine/MM_JSSyncEngine.js",
-            "line": 4729,
-            "description": "Build SOQL query string for so (sync object) param pulled from json.sync",
-            "itemtype": "method",
-            "name": "buildQuery",
-            "params": [
-                {
-                    "name": "so",
-                    "description": "- Sync object param pulled from json.sync",
-                    "type": "SyncObject"
-                }
-            ],
-            "class": "MMSync",
-            "module": "MM_JSSyncEngine"
-        },
-        {
-            "file": "GE_MobileMap/www/lib/MM_JSSyncEngine/MM_JSSyncEngine.js",
-            "line": 4799,
-            "description": "Check to see if field is in the sync object's ignore list",
-            "itemtype": "method",
-            "name": "checkIgnoreField",
-            "params": [
-                {
-                    "name": "so",
-                    "description": "- sync object from sync.json",
-                    "type": "SyncObject"
-                },
-                {
-                    "name": "fieldName",
-                    "description": "- fieldName to check",
-                    "type": "String"
-                }
-            ],
-            "class": "MMSync",
-            "module": "MM_JSSyncEngine"
-        },
-        {
-            "file": "GE_MobileMap/www/lib/MM_JSSyncEngine/MM_JSSyncEngine.js",
-            "line": 4815,
-            "description": "Response handler for Salesforce sobject query. \nChecks to see if more objects need to be retrieved and calls appropriate url if needed.\nMakes call for each result set to cache to local database/smarstore soup\nMakes call to check if all data synchronization is complete.",
-            "access": "protected",
-            "tagname": "",
-            "itemtype": "method",
-            "name": "handleSyncObjectResult",
-            "params": [
-                {
-                    "name": "response",
-                    "description": ""
-                },
-                {
-                    "name": "objName",
-                    "description": ""
-                },
-                {
-                    "name": "nocache",
-                    "description": ""
-                }
-            ],
-            "class": "MMSync",
-            "module": "MM_JSSyncEngine"
-        },
-        {
-            "file": "GE_MobileMap/www/lib/MM_JSSyncEngine/MM_JSSyncEngine.js",
-            "line": 4881,
-            "description": "Gets the next url",
-            "itemtype": "method",
-            "name": "getNextUrl",
-            "params": [
-                {
-                    "name": "nextRecordsUrl",
-                    "description": "",
-                    "type": "String"
-                },
-                {
-                    "name": "callback",
-                    "description": "",
-                    "type": "Function"
+                    "type": "Int"
                 },
                 {
                     "name": "thisObj",
@@ -1811,715 +157,301 @@
                     "type": "Object"
                 },
                 {
-                    "name": "nocache",
-                    "description": ""
+                    "name": "callbackFn",
+                    "description": "",
+                    "type": "Function"
                 }
             ],
-            "class": "MMSync",
-            "module": "MM_JSSyncEngine"
+            "extends": "Callback"
         },
-        {
-            "file": "GE_MobileMap/www/lib/MM_JSSyncEngine/MM_JSSyncEngine.js",
-            "line": 4897,
-            "description": "Check to see if all queryMore's have been made for all objects in sync.json (compare length \nof mmSync.syncObjectCount to sync.json object array length",
-            "itemtype": "method",
-            "name": "checkSyncComplete",
+        "NamedLatch": {
+            "name": "NamedLatch",
+            "shortname": "NamedLatch",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "module": "JSAsynch",
+            "namespace": "",
+            "file": "src/asynch.js",
+            "line": 281,
+            "description": "NamedLatch requires that all latches provided must be released\nThis means that latches must be unique or will throw an exception.",
+            "is_constructor": 1,
+            "extends": "CountdownCallback",
             "params": [
                 {
-                    "name": "objName",
+                    "name": "latchList",
+                    "description": "(Array<String>)"
+                },
+                {
+                    "name": "thisObj",
+                    "description": ""
+                },
+                {
+                    "name": "callbackFn",
+                    "description": ""
+                }
+            ]
+        },
+        "CyclicalCallback": {
+            "name": "CyclicalCallback",
+            "shortname": "CyclicalCallback",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "module": "JSAsynch",
+            "namespace": "",
+            "file": "src/asynch.js",
+            "line": 431,
+            "description": "Object that represents a cyclical barrier",
+            "is_constructor": 1,
+            "extends": "CountdownCallback",
+            "params": [
+                {
+                    "name": "latchCount",
+                    "description": "",
+                    "type": "Int"
+                },
+                {
+                    "name": "thisObj",
+                    "description": "",
+                    "type": "Object"
+                },
+                {
+                    "name": "callbackFn",
+                    "description": "",
+                    "type": "Function"
+                }
+            ]
+        },
+        "RunnableCallback": {
+            "name": "RunnableCallback",
+            "shortname": "RunnableCallback",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "module": "JSAsynch",
+            "namespace": "",
+            "file": "src/asynch.js",
+            "line": 476,
+            "description": "Abstract class that contains a callback that should execute at some point after\ncompleting run. (This allows for asynchronous methods to run that should perform\na callback when it has completed)",
+            "is_constructor": 1
+        }
+    },
+    "classitems": [
+        {
+            "file": "src/asynch.js",
+            "line": 22,
+            "description": "Describes the object as being a callback",
+            "itemtype": "property",
+            "name": "isCallback",
+            "class": "Callback",
+            "module": "JSAsynch"
+        },
+        {
+            "file": "src/asynch.js",
+            "line": 44,
+            "description": "Empty method to provide a NOOP",
+            "itemtype": "method",
+            "name": "empty",
+            "access": "protected",
+            "tagname": "",
+            "class": "Callback",
+            "module": "JSAsynch"
+        },
+        {
+            "file": "src/asynch.js",
+            "line": 51,
+            "description": "Performs the callback.\n<p>Note, exec, callback, run, among other names could potentially be considered keywoards,\nso the name was chosen instead</p>\n<p>Calling the method with a null scope can cause some unexpected consequences</p>",
+            "itemtype": "method",
+            "name": "execCallback",
+            "params": [
+                {
+                    "name": "PASSTHROUGH",
+                    "description": "",
+                    "optional": true
+                }
+            ],
+            "class": "Callback",
+            "module": "JSAsynch"
+        },
+        {
+            "file": "src/asynch.js",
+            "line": 110,
+            "description": "Calls success method.\n(Meaning it calls the successFn using successThis as the scope",
+            "itemtype": "method",
+            "name": "success",
+            "params": [
+                {
+                    "name": "PASSTHROUGH",
+                    "description": "",
+                    "optional": true
+                }
+            ],
+            "class": "SuccessFailCallback",
+            "module": "JSAsynch"
+        },
+        {
+            "file": "src/asynch.js",
+            "line": 121,
+            "description": "Calls failure method.\n(Meaning it calls the failureFn using failureThis as the scope",
+            "itemtype": "method",
+            "name": "fail",
+            "params": [
+                {
+                    "name": "PASSTHROUGH",
+                    "description": "",
+                    "optional": true
+                }
+            ],
+            "class": "SuccessFailCallback",
+            "module": "JSAsynch"
+        },
+        {
+            "file": "src/asynch.js",
+            "line": 134,
+            "description": "Determines whether the object is a successFailCallback",
+            "global": "",
+            "itemtype": "method",
+            "name": "isSuccessFailCallback",
+            "params": [
+                {
+                    "name": "obj",
+                    "description": "- object to be determined whether it is a successFailCallback",
+                    "type": "Object"
+                }
+            ],
+            "class": "SuccessFailCallback",
+            "module": "JSAsynch"
+        },
+        {
+            "file": "src/asynch.js",
+            "line": 145,
+            "description": "simple function that claims sucess and console logs out all arguments.\n<p>Example usage: forcetkClient.query( myQuery, simpleSuccess, simpleFailure );</p>",
+            "global": "",
+            "itemtype": "method",
+            "name": "simpleSuccess",
+            "params": [
+                {
+                    "name": "PASSTHROUGH",
+                    "description": "",
+                    "optional": true
+                }
+            ],
+            "class": "SuccessFailCallback",
+            "module": "JSAsynch"
+        },
+        {
+            "file": "src/asynch.js",
+            "line": 157,
+            "description": "Simple function that claims failure and console logs out all arguments\n<p>Example usage: forcetkClient.query( myQuery, simpleSuccess, simpleFailure );</p>",
+            "global": "",
+            "itemtype": "method",
+            "name": "simpleFailure",
+            "params": [
+                {
+                    "name": "PASSTHROUGH",
+                    "description": "",
+                    "optional": true
+                }
+            ],
+            "class": "SuccessFailCallback",
+            "module": "JSAsynch"
+        },
+        {
+            "file": "src/asynch.js",
+            "line": 169,
+            "description": "Simple callback that simply claims success, or failure and console logs the results.\n<p>Note: it may be preferrable to use a different object with large datasets/volumes\nas consolelog, especially from the device can have issues with too many records being printed at a time</p>",
+            "itemtype": "property",
+            "name": "debugCB",
+            "global": "",
+            "class": "SuccessFailCallback",
+            "module": "JSAsynch"
+        },
+        {
+            "file": "src/asynch.js",
+            "line": 217,
+            "description": "Adds a latch to the count as something else that needs to be waited for",
+            "itemtype": "method",
+            "name": "addStrap",
+            "class": "CountdownCallback",
+            "module": "JSAsynch"
+        },
+        {
+            "file": "src/asynch.js",
+            "line": 227,
+            "description": "Determines the number of latches remaining",
+            "itemtype": "method",
+            "name": "getLatchCount",
+            "class": "CountdownCallback",
+            "module": "JSAsynch"
+        },
+        {
+            "file": "src/asynch.js",
+            "line": 235,
+            "description": "Determines if the latch is currently released",
+            "itemtype": "method",
+            "name": "isReleased",
+            "class": "CountdownCallback",
+            "module": "JSAsynch"
+        },
+        {
+            "file": "src/asynch.js",
+            "line": 243,
+            "description": "Releases a latch and executes the callbackFn if all the latches are released.",
+            "params": [
+                {
+                    "name": "boolean",
+                    "description": "- whether the latch is currently released"
+                },
+                {
+                    "name": "PASSTHROUGH",
+                    "description": "",
+                    "optional": true
+                }
+            ],
+            "itemtype": "method",
+            "name": "release",
+            "class": "CountdownCallback",
+            "module": "JSAsynch"
+        },
+        {
+            "file": "src/asynch.js",
+            "line": 370,
+            "description": "Determines whether a named latch has been released",
+            "itemtype": "method",
+            "name": "isLatchReleased",
+            "params": [
+                {
+                    "name": "latchName",
                     "description": "",
                     "type": "String"
                 }
             ],
-            "class": "MMSync",
-            "module": "MM_JSSyncEngine"
+            "class": "NamedLatch",
+            "module": "JSAsynch"
         },
         {
-            "file": "GE_MobileMap/www/lib/MM_JSSyncEngine/MM_JSSyncEngine.js",
-            "line": 4913,
-            "description": "Check Sync Update Time Callback",
+            "file": "src/asynch.js",
+            "line": 489,
+            "description": "Calls the callback",
             "itemtype": "method",
-            "name": "checkSyncUpdateTimeCallback",
+            "name": "run",
             "params": [
                 {
-                    "name": "result",
-                    "description": ""
-                }
-            ],
-            "class": "MMSync",
-            "module": "MM_JSSyncEngine"
-        },
-        {
-            "file": "GE_MobileMap/www/lib/MM_JSSyncEngine/MM_JSSyncEngine.js",
-            "line": 4944,
-            "description": "Error handler for Salesforce data query",
-            "itemtype": "method",
-            "name": "handleErrorSFDC",
-            "params": [
-                {
-                    "name": "error",
-                    "description": ""
-                }
-            ],
-            "class": "MMSync",
-            "module": "MM_JSSyncEngine"
-        },
-        {
-            "file": "GE_MobileMap/www/lib/MM_JSSyncEngine/MM_JSSyncEngine.js",
-            "line": 4956,
-            "description": "Hide sync status screen and complete sync. \nDispatch sync_complete event using jquery.trigger to alert application to continue.",
-            "access": "protected",
-            "tagname": "",
-            "itemtype": "method",
-            "name": "finishSync",
-            "class": "MMSync",
-            "module": "MM_JSSyncEngine"
-        },
-        {
-            "file": "GE_MobileMap/www/lib/MM_JSSyncEngine/MM_JSSyncEngine.js",
-            "line": 4979,
-            "itemtype": "method",
-            "name": "start",
-            "class": "SObject",
-            "module": "MM_JSSyncEngine"
-        },
-        {
-            "file": "GE_MobileMap/www/lib/MM_JSSyncEngine/MM_JSSyncEngine.js",
-            "line": 4993,
-            "itemtype": "method",
-            "name": "dateTimeToUTCString",
-            "params": [
-                {
-                    "name": "theDate",
+                    "name": "PASSTHROUGH",
                     "description": "",
-                    "type": "DateTime"
-                }
-            ],
-            "return": {
-                "description": "",
-                "type": "String"
-            },
-            "class": "Util",
-            "module": "MM_JSSyncEngine"
-        },
-        {
-            "file": "GE_MobileMap/www/lib/MM_JSSyncEngine/MM_JSSyncEngine.js",
-            "line": 5027,
-            "itemtype": "method",
-            "name": "LoadAllRecords",
-            "params": [
-                {
-                    "name": "cursor",
-                    "description": ""
-                },
-                {
-                    "name": "records",
-                    "description": ""
-                }
-            ],
-            "deprecated": true,
-            "deprecationMessage": "-- use MMJSE_SmartStoreUtil.LoadAllRecords instead",
-            "class": "Util",
-            "module": "MM_JSSyncEngine"
-        },
-        {
-            "file": "GE_MobileMap/www/lib/MM_JSSyncEngine/MM_JSSyncEngine.js",
-            "line": 5037,
-            "itemtype": "method",
-            "name": "AddEntriesFromCursorTo\nparam cursor",
-            "params": [
-                {
-                    "name": "records",
-                    "description": ""
-                }
-            ],
-            "deprecated": true,
-            "deprecationMessage": "-- use MMJSE_SmartStoreUtil.AddEntriesFromCursorTo instead",
-            "class": "Util",
-            "module": "MM_JSSyncEngine"
-        },
-        {
-            "file": "GE_MobileMap/www/lib/MM_JSSyncEngine/MM_JSSyncEngine.js",
-            "line": 5055,
-            "description": "load all records from all pages for the specified cursor into the specified array",
-            "itemtype": "method",
-            "name": "LoadAllRecords",
-            "static": 1,
-            "params": [
-                {
-                    "name": "cursor",
-                    "description": "-",
-                    "type": "Cursor"
-                },
-                {
-                    "name": "records",
-                    "description": "-",
-                    "type": "Array"
-                }
-            ],
-            "class": "MMJSE_SmartStoreUtil",
-            "module": "MM_JSSyncEngine"
-        },
-        {
-            "file": "GE_MobileMap/www/lib/MM_JSSyncEngine/MM_JSSyncEngine.js",
-            "line": 5078,
-            "description": "load a limited set of records from the specified cursor into the specified array",
-            "itemtype": "method",
-            "name": "LoadRecordsWithLimit",
-            "static": 1,
-            "params": [
-                {
-                    "name": "limit",
-                    "description": ""
-                },
-                {
-                    "name": "cursor",
-                    "description": "-",
-                    "type": "Cursor"
-                },
-                {
-                    "name": "records",
-                    "description": "-",
-                    "type": "Records"
-                }
-            ],
-            "class": "MMJSE_SmartStoreUtil",
-            "module": "MM_JSSyncEngine"
-        },
-        {
-            "file": "GE_MobileMap/www/lib/MM_JSSyncEngine/MM_JSSyncEngine.js",
-            "line": 5119,
-            "description": "define handler for paging from SmartStore query",
-            "itemtype": "method",
-            "name": "AddEntriesFromCursorTo",
-            "static": 1,
-            "params": [
-                {
-                    "name": "cursor",
-                    "description": "- the cursor to add items to",
-                    "type": "Cursor"
-                },
-                {
-                    "name": "records",
-                    "description": "- the records to add",
-                    "type": "Array[]"
-                }
-            ],
-            "class": "MMJSE_SmartStoreUtil",
-            "module": "MM_JSSyncEngine"
-        },
-        {
-            "file": "GE_MobileMap/www/lib/forcetk.js",
-            "line": 88,
-            "description": "Set a refresh token in the client.",
-            "itemtype": "method",
-            "name": "setRefreshToken",
-            "params": [
-                {
-                    "name": "refreshToken",
-                    "description": "an OAuth refresh token"
-                }
-            ],
-            "class": "ForcetkClient",
-            "module": "Forcetk"
-        },
-        {
-            "file": "GE_MobileMap/www/lib/forcetk.js",
-            "line": 97,
-            "description": "Refresh the access token.",
-            "itemtype": "method",
-            "name": "refreshAccessToken",
-            "params": [
-                {
-                    "name": "callback",
-                    "description": "function to call on success"
-                },
-                {
-                    "name": "error",
-                    "description": "function to call on failure"
-                }
-            ],
-            "class": "ForcetkClient",
-            "module": "Forcetk"
-        },
-        {
-            "file": "GE_MobileMap/www/lib/forcetk.js",
-            "line": 123,
-            "description": "Set a session token and the associated metadata in the client.",
-            "itemtype": "method",
-            "name": "setSessionToken",
-            "params": [
-                {
-                    "name": "sessionId",
-                    "description": "a salesforce.com session ID. In a Visualforce page,\n                  use '' to obtain a session ID.",
-                    "type": "!$Api.sessionId"
-                },
-                {
-                    "name": "apiVersion",
-                    "description": "Force.com API version",
-                    "optional": true,
-                    "optdefault": "\"21.0\""
-                },
-                {
-                    "name": "instanceUrl",
-                    "description": "Omit this if running on Visualforce; otherwise \n                  use the value from the OAuth token.",
                     "optional": true
                 }
             ],
-            "class": "ForcetkClient",
-            "module": "Forcetk"
-        },
-        {
-            "file": "GE_MobileMap/www/lib/forcetk.js",
-            "line": 148,
-            "description": "Low level utility function to call the Salesforce endpoint.",
-            "itemtype": "method",
-            "name": "ajax",
-            "params": [
-                {
-                    "name": "path",
-                    "description": "resource path relative to /services/data"
-                },
-                {
-                    "name": "callback",
-                    "description": "function to which response will be passed"
-                },
-                {
-                    "name": "error",
-                    "description": "function to which jqXHR will be passed in case of error",
-                    "optional": true,
-                    "optdefault": "null"
-                },
-                {
-                    "name": "method",
-                    "description": "HTTP method for call",
-                    "optional": true,
-                    "optdefault": "\"GET\""
-                },
-                {
-                    "name": "payload",
-                    "description": "payload for POST/PATCH etc",
-                    "optional": true,
-                    "optdefault": "null"
-                }
-            ],
-            "class": "ForcetkClient",
-            "module": "Forcetk"
-        },
-        {
-            "file": "GE_MobileMap/www/lib/forcetk.js",
-            "line": 193,
-            "description": "Utility function to query the Chatter API and download a file\nNote, raw XMLHttpRequest because JQuery mangles the arraybuffer\nThis should work on any browser that supports XMLHttpRequest 2 because arraybuffer is required. \nFor mobile, that means iOS >= 5 and Android >= Honeycomb",
-            "itemtype": "method",
-            "name": "getChatterFile",
-            "author": "Tom Gersic",
-            "params": [
-                {
-                    "name": "path",
-                    "description": "resource path relative to /services/data"
-                },
-                {
-                    "name": "mimetype",
-                    "description": "of the file"
-                },
-                {
-                    "name": "callback",
-                    "description": "function to which response will be passed"
-                },
-                {
-                    "name": "error",
-                    "description": "function to which request will be passed in case of error",
-                    "optional": true,
-                    "optdefault": "null"
-                },
-                {
-                    "name": "rety",
-                    "description": "true if we've already tried refresh token flow once"
-                }
-            ],
-            "class": "ForcetkClient",
-            "module": "Forcetk"
-        },
-        {
-            "file": "GE_MobileMap/www/lib/forcetk.js",
-            "line": 255,
-            "description": "Low level utility function to call the Salesforce endpoint specific for Apex REST API.",
-            "itemtype": "method",
-            "name": "apexrest",
-            "params": [
-                {
-                    "name": "path",
-                    "description": "resource path relative to /services/apexrest"
-                },
-                {
-                    "name": "callback",
-                    "description": "function to which response will be passed"
-                },
-                {
-                    "name": "error",
-                    "description": "function to which jqXHR will be passed in case of error",
-                    "optional": true,
-                    "optdefault": "null"
-                },
-                {
-                    "name": "method",
-                    "description": "HTTP method for call",
-                    "optional": true,
-                    "optdefault": "\"GET\""
-                },
-                {
-                    "name": "payload",
-                    "description": "payload for POST/PATCH etc",
-                    "optional": true,
-                    "optdefault": "null"
-                }
-            ],
-            "class": "ForcetkClient",
-            "module": "Forcetk"
-        },
-        {
-            "file": "GE_MobileMap/www/lib/forcetk.js",
-            "line": 300,
-            "description": "Lists summary information about each Salesforce.com version currently \navailable, including the version, label, and a link to each version's\nroot.",
-            "itemtype": "method",
-            "name": "versions",
-            "params": [
-                {
-                    "name": "callback",
-                    "description": "function to which response will be passed"
-                },
-                {
-                    "name": "error",
-                    "description": "function to which jqXHR will be passed in case of error",
-                    "optional": true,
-                    "optdefault": "null"
-                }
-            ],
-            "class": "ForcetkClient",
-            "module": "Forcetk"
-        },
-        {
-            "file": "GE_MobileMap/www/lib/forcetk.js",
-            "line": 312,
-            "description": "Lists available resources for the client's API version, including \nresource name and URI.",
-            "itemtype": "method",
-            "name": "resources",
-            "params": [
-                {
-                    "name": "callback",
-                    "description": "function to which response will be passed"
-                },
-                {
-                    "name": "error",
-                    "description": "function to which jqXHR will be passed in case of error",
-                    "optional": true,
-                    "optdefault": "null"
-                }
-            ],
-            "class": "ForcetkClient",
-            "module": "Forcetk"
-        },
-        {
-            "file": "GE_MobileMap/www/lib/forcetk.js",
-            "line": 323,
-            "description": "Lists the available objects and their metadata for your organization's \ndata.",
-            "itemtype": "method",
-            "name": "describeGlobal",
-            "params": [
-                {
-                    "name": "callback",
-                    "description": "function to which response will be passed"
-                },
-                {
-                    "name": "error",
-                    "description": "function to which jqXHR will be passed in case of error",
-                    "optional": true,
-                    "optdefault": "null"
-                }
-            ],
-            "class": "ForcetkClient",
-            "module": "Forcetk"
-        },
-        {
-            "file": "GE_MobileMap/www/lib/forcetk.js",
-            "line": 334,
-            "description": "Describes the individual metadata for the specified object.",
-            "itemtype": "method",
-            "name": "metadata",
-            "params": [
-                {
-                    "name": "objtype",
-                    "description": "object type; e.g. \"Account\""
-                },
-                {
-                    "name": "callback",
-                    "description": "function to which response will be passed"
-                },
-                {
-                    "name": "error",
-                    "description": "function to which jqXHR will be passed in case of error",
-                    "optional": true,
-                    "optdefault": "null"
-                }
-            ],
-            "class": "ForcetkClient",
-            "module": "Forcetk"
-        },
-        {
-            "file": "GE_MobileMap/www/lib/forcetk.js",
-            "line": 346,
-            "description": "Completely describes the individual metadata at all levels for the \nspecified object.",
-            "itemtype": "method",
-            "name": "describe",
-            "params": [
-                {
-                    "name": "objtype",
-                    "description": "object type; e.g. \"Account\""
-                },
-                {
-                    "name": "callback",
-                    "description": "function to which response will be passed"
-                },
-                {
-                    "name": "error",
-                    "description": "function to which jqXHR will be passed in case of error",
-                    "optional": true,
-                    "optdefault": "null"
-                }
-            ],
-            "class": "ForcetkClient",
-            "module": "Forcetk"
-        },
-        {
-            "file": "GE_MobileMap/www/lib/forcetk.js",
-            "line": 359,
-            "description": "Creates a new record of the given type.",
-            "itemtype": "method",
-            "name": "create",
-            "params": [
-                {
-                    "name": "objtype",
-                    "description": "object type; e.g. \"Account\""
-                },
-                {
-                    "name": "fields",
-                    "description": "an object containing initial field names and values for \n              the record, e.g.",
-                    "type": ":Name \"salesforce.com\", :TickerSymbol !~YUIDOC_LINE~!              \"CRM\""
-                },
-                {
-                    "name": "callback",
-                    "description": "function to which response will be passed"
-                },
-                {
-                    "name": "error",
-                    "description": "function to which jqXHR will be passed in case of error",
-                    "optional": true,
-                    "optdefault": "null"
-                }
-            ],
-            "class": "ForcetkClient",
-            "module": "Forcetk"
-        },
-        {
-            "file": "GE_MobileMap/www/lib/forcetk.js",
-            "line": 374,
-            "description": "Retrieves field values for a record of the given type.",
-            "itemtype": "method",
-            "name": "retrieve",
-            "params": [
-                {
-                    "name": "objtype",
-                    "description": "object type; e.g. \"Account\""
-                },
-                {
-                    "name": "id",
-                    "description": "the record's object ID"
-                },
-                {
-                    "name": "fields",
-                    "description": "optional comma-separated list of fields for which \n              to return values; e.g. Name,Industry,TickerSymbol",
-                    "optional": true,
-                    "optdefault": "null"
-                },
-                {
-                    "name": "callback",
-                    "description": "function to which response will be passed"
-                },
-                {
-                    "name": "error",
-                    "description": "function to which jqXHR will be passed in case of error",
-                    "optional": true,
-                    "optdefault": "null"
-                }
-            ],
-            "class": "ForcetkClient",
-            "module": "Forcetk"
-        },
-        {
-            "file": "GE_MobileMap/www/lib/forcetk.js",
-            "line": 395,
-            "description": "Upsert - creates or updates record of the given type, based on the \ngiven external Id.",
-            "itemtype": "method",
-            "name": "upsert",
-            "params": [
-                {
-                    "name": "objtype",
-                    "description": "object type; e.g. \"Account\""
-                },
-                {
-                    "name": "externalIdField",
-                    "description": "external ID field name; e.g. \"accountMaster__c\""
-                },
-                {
-                    "name": "externalId",
-                    "description": "the record's external ID value"
-                },
-                {
-                    "name": "fields",
-                    "description": "an object containing field names and values for \n              the record, e.g.",
-                    "type": ":Name \"salesforce.com\", :TickerSymbol !~YUIDOC_LINE~!              \"CRM\""
-                },
-                {
-                    "name": "callback",
-                    "description": "function to which response will be passed"
-                },
-                {
-                    "name": "error",
-                    "description": "function to which jqXHR will be passed in case of error",
-                    "optional": true,
-                    "optdefault": "null"
-                }
-            ],
-            "class": "ForcetkClient",
-            "module": "Forcetk"
-        },
-        {
-            "file": "GE_MobileMap/www/lib/forcetk.js",
-            "line": 413,
-            "description": "Updates field values on a record of the given type.",
-            "itemtype": "method",
-            "name": "update",
-            "params": [
-                {
-                    "name": "objtype",
-                    "description": "object type; e.g. \"Account\""
-                },
-                {
-                    "name": "id",
-                    "description": "the record's object ID"
-                },
-                {
-                    "name": "fields",
-                    "description": "an object containing initial field names and values for \n              the record, e.g.",
-                    "type": ":Name \"salesforce.com\", :TickerSymbol !~YUIDOC_LINE~!              \"CRM\""
-                },
-                {
-                    "name": "callback",
-                    "description": "function to which response will be passed"
-                },
-                {
-                    "name": "error",
-                    "description": "function to which jqXHR will be passed in case of error",
-                    "optional": true,
-                    "optdefault": "null"
-                }
-            ],
-            "class": "ForcetkClient",
-            "module": "Forcetk"
-        },
-        {
-            "file": "GE_MobileMap/www/lib/forcetk.js",
-            "line": 429,
-            "description": "Deletes a record of the given type. Unfortunately, 'delete' is a \nreserved word in JavaScript.",
-            "itemtype": "method",
-            "name": "del",
-            "params": [
-                {
-                    "name": "objtype",
-                    "description": "object type; e.g. \"Account\""
-                },
-                {
-                    "name": "id",
-                    "description": "the record's object ID"
-                },
-                {
-                    "name": "callback",
-                    "description": "function to which response will be passed"
-                },
-                {
-                    "name": "error",
-                    "description": "function to which jqXHR will be passed in case of error",
-                    "optional": true,
-                    "optdefault": "null"
-                }
-            ],
-            "class": "ForcetkClient",
-            "module": "Forcetk"
-        },
-        {
-            "file": "GE_MobileMap/www/lib/forcetk.js",
-            "line": 443,
-            "description": "Executes the specified SOQL query.",
-            "itemtype": "method",
-            "name": "query",
-            "params": [
-                {
-                    "name": "soql",
-                    "description": "a string containing the query to execute - e.g. \"SELECT Id, \n            Name from Account ORDER BY Name LIMIT 20\""
-                },
-                {
-                    "name": "callback",
-                    "description": "function to which response will be passed"
-                },
-                {
-                    "name": "error",
-                    "description": "function to which jqXHR will be passed in case of error",
-                    "optional": true,
-                    "optdefault": "null"
-                }
-            ],
-            "class": "ForcetkClient",
-            "module": "Forcetk"
-        },
-        {
-            "file": "GE_MobileMap/www/lib/forcetk.js",
-            "line": 456,
-            "description": "Executes the specified SOSL search.",
-            "itemtype": "method",
-            "name": "search",
-            "params": [
-                {
-                    "name": "sosl",
-                    "description": "a string containing the search to execute - e.g. \"FIND \n            \"",
-                    "type": "Needle"
-                },
-                {
-                    "name": "callback",
-                    "description": "function to which response will be passed"
-                },
-                {
-                    "name": "error",
-                    "description": "function to which jqXHR will be passed in case of error",
-                    "optional": true,
-                    "optdefault": "null"
-                }
-            ],
-            "class": "ForcetkClient",
-            "module": "Forcetk"
+            "class": "RunnableCallback",
+            "module": "JSAsynch"
         }
     ],
-    "warnings": [
-        {
-            "message": "unknown tag: note",
-            "line": " GE_MobileMap/www/lib/MM_JSSyncEngine/MM_JSSyncEngine.js:4309"
-        },
-        {
-            "message": "Missing item type\nMM JSync library\nversion 1.0.0a",
-            "line": " GE_MobileMap/www/lib/MM_JSSyncEngine/MM_JSSyncEngine.js:1"
-        },
-        {
-            "message": "Missing item type\nRuns OfflineQueue method to push all local data to Salesforce.com based on json.sync.objects definitions\ncallback is required",
-            "line": " GE_MobileMap/www/lib/MM_JSSyncEngine/MM_JSSyncEngine.js:4594"
-        }
-    ]
+    "warnings": []
 }

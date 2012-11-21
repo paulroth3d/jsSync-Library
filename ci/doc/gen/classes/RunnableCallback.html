@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>SObject - MM Sync Engine</title>
+    <title>RunnableCallback - MM Sync Engine</title>
     <link rel="stylesheet" href="http:&#x2F;&#x2F;yui.yahooapis.com&#x2F;3.7.0&#x2F;build&#x2F;cssgrids&#x2F;cssgrids-min.css">
     <link rel="stylesheet" href="..&#x2F;assets/vendor/prettify/prettify-min.css">
     <link rel="stylesheet" href="..&#x2F;assets/css/main.css" id="site_styles">
@@ -15,11 +15,11 @@
     <div id="hd" class="yui3-g header">
         <div class="yui3-u-3-4">
             
-                <h1><img src="http:&#x2F;&#x2F;mm-proth.s3.amazonaws.com&#x2F;ge_mobileMap&#x2F;icon&#x2F;icon-72.png" title="MM Sync Engine"></h1>
+                <h1><img src="http:&#x2F;&#x2F;mm-proth.s3.amazonaws.com&#x2F;syncIcon.png" title="MM Sync Engine"></h1>
             
         </div>
         <div class="yui3-u-1-4 version">
-            <em>API Docs for: 0.0.1</em>
+            <em>API Docs for: </em>
         </div>
     </div>
     <div id="bd" class="yui3-g">
@@ -41,55 +41,25 @@
         <div id="api-tabview-panel">
             <ul id="api-classes" class="apis classes">
             
-                <li><a href="..&#x2F;classes/ForcetkClient.html">ForcetkClient</a></li>
+                <li><a href="..&#x2F;classes/Callback.html">Callback</a></li>
             
-                <li><a href="..&#x2F;classes/MMJSE_SmartStoreUtil.html">MMJSE_SmartStoreUtil</a></li>
+                <li><a href="..&#x2F;classes/CountdownCallback.html">CountdownCallback</a></li>
             
-                <li><a href="..&#x2F;classes/MMSync.html">MMSync</a></li>
+                <li><a href="..&#x2F;classes/CyclicalCallback.html">CyclicalCallback</a></li>
             
-                <li><a href="..&#x2F;classes/Network.html">Network</a></li>
+                <li><a href="..&#x2F;classes/EmptyCallback.html">EmptyCallback</a></li>
             
-                <li><a href="..&#x2F;classes/OfflineQueue.html">OfflineQueue</a></li>
+                <li><a href="..&#x2F;classes/NamedLatch.html">NamedLatch</a></li>
             
-                <li><a href="..&#x2F;classes/sforce.html">sforce</a></li>
+                <li><a href="..&#x2F;classes/RunnableCallback.html">RunnableCallback</a></li>
             
-                <li><a href="..&#x2F;classes/sforce.Base64Binary.html">sforce.Base64Binary</a></li>
-            
-                <li><a href="..&#x2F;classes/sforce.Connection.html">sforce.Connection</a></li>
-            
-                <li><a href="..&#x2F;classes/sforce.internal.html">sforce.internal</a></li>
-            
-                <li><a href="..&#x2F;classes/sforce.LeadConvert.html">sforce.LeadConvert</a></li>
-            
-                <li><a href="..&#x2F;classes/sforce.MergeRequest.html">sforce.MergeRequest</a></li>
-            
-                <li><a href="..&#x2F;classes/sforce.SoapTransport.html">sforce.SoapTransport</a></li>
-            
-                <li><a href="..&#x2F;classes/sforce.SObject.html">sforce.SObject</a></li>
-            
-                <li><a href="..&#x2F;classes/sforce.StringBuffer.html">sforce.StringBuffer</a></li>
-            
-                <li><a href="..&#x2F;classes/sforce.Xml.html">sforce.Xml</a></li>
-            
-                <li><a href="..&#x2F;classes/sforce.XmlReader.html">sforce.XmlReader</a></li>
-            
-                <li><a href="..&#x2F;classes/sforce.XmlWriter.html">sforce.XmlWriter</a></li>
-            
-                <li><a href="..&#x2F;classes/SObject.html">SObject</a></li>
-            
-                <li><a href="..&#x2F;classes/Util.html">Util</a></li>
-            
-                <li><a href="..&#x2F;classes/vo.MetadataVO.html">vo.MetadataVO</a></li>
+                <li><a href="..&#x2F;classes/SuccessFailCallback.html">SuccessFailCallback</a></li>
             
             </ul>
 
             <ul id="api-modules" class="apis modules">
             
-                <li><a href="..&#x2F;modules/Forcetk.html">Forcetk</a></li>
-            
-                <li><a href="..&#x2F;modules/MM_JSSyncEngine.html">MM_JSSyncEngine</a></li>
-            
-                <li><a href="..&#x2F;modules/SalesforceAjaxToolkit.html">SalesforceAjaxToolkit</a></li>
+                <li><a href="..&#x2F;modules/JSAsynch.html">JSAsynch</a></li>
             
             </ul>
         </div>
@@ -126,7 +96,7 @@
             <div class="apidocs">
                 <div id="docs-main">
                     <div class="content">
-                        <h1>SObject Class</h1>
+                        <h1>RunnableCallback Class</h1>
 <div class="box meta">
     
 
@@ -134,13 +104,13 @@
 
     
         <div class="foundat">
-            Defined in: <a href="..&#x2F;files&#x2F;GE_MobileMap_www_lib_MM_JSSyncEngine_MM_JSSyncEngine.js.html#l4970"><code>GE_MobileMap&#x2F;www&#x2F;lib&#x2F;MM_JSSyncEngine&#x2F;MM_JSSyncEngine.js:4970</code></a>
+            Defined in: <a href="..&#x2F;files&#x2F;src_asynch.js.html#l476"><code>src&#x2F;asynch.js:476</code></a>
         </div>
     
 
     
         
-            Module: <a href="../modules/MM_JSSyncEngine.html">MM_JSSyncEngine</a>
+            Module: <a href="../modules/JSAsynch.html">JSAsynch</a>
         
     
 
@@ -150,14 +120,16 @@
 
 
 <div class="box intro">
-    <p>SObject VO</p>
+    <p>Abstract class that contains a callback that should execute at some point after
+completing run. (This allows for asynchronous methods to run that should perform
+a callback when it has completed)</p>
 </div>
 
 
     <div class="constructor">
         <h2>Constructor</h2>
-        <div id="method_SObject" class="method item">
-    <h3 class="name"><code>SObject</code></h3>
+        <div id="method_RunnableCallback" class="method item">
+    <h3 class="name"><code>RunnableCallback</code></h3>
 
     
         <span class="paren">()</span>
@@ -188,7 +160,7 @@
             
         
         
-        <a href="..&#x2F;files&#x2F;GE_MobileMap_www_lib_MM_JSSyncEngine_MM_JSSyncEngine.js.html#l4970"><code>GE_MobileMap&#x2F;www&#x2F;lib&#x2F;MM_JSSyncEngine&#x2F;MM_JSSyncEngine.js:4970</code></a>
+        <a href="..&#x2F;files&#x2F;src_asynch.js.html#l476"><code>src&#x2F;asynch.js:476</code></a>
         
         </p>
 
@@ -235,7 +207,7 @@
                     <ul class="index-list methods">
                         
                             <li class="index-item method">
-                                <a href="#method_start">start</a>
+                                <a href="#method_run">run</a>
 
                                 
                                 
@@ -257,11 +229,21 @@
                 <h2 class="off-left">Methods</h2>
 
                 
-                    <div id="method_start" class="method item">
-    <h3 class="name"><code>start</code></h3>
+                    <div id="method_run" class="method item">
+    <h3 class="name"><code>run</code></h3>
 
     
-        <span class="paren">()</span>
+        <div class="args">
+            <span class="paren">(</span><ul class="args-list inline commas">
+            
+                <li class="arg">
+                    
+                        <code class="optional">[PASSTHROUGH]</code>
+                    
+                </li>
+            
+            </ul><span class="paren">)</span>
+        </div>
     
 
     
@@ -289,7 +271,7 @@
             
         
         
-        <a href="..&#x2F;files&#x2F;GE_MobileMap_www_lib_MM_JSSyncEngine_MM_JSSyncEngine.js.html#l4979"><code>GE_MobileMap&#x2F;www&#x2F;lib&#x2F;MM_JSSyncEngine&#x2F;MM_JSSyncEngine.js:4979</code></a>
+        <a href="..&#x2F;files&#x2F;src_asynch.js.html#l489"><code>src&#x2F;asynch.js:489</code></a>
         
         </p>
 
@@ -300,9 +282,33 @@
     </div>
 
     <div class="description">
-        
+        <p>Calls the callback</p>
     </div>
 
+    
+        <div class="params">
+            <h4>Parameters:</h4>
+
+            <ul class="params-list">
+            
+                <li class="param">
+                    
+                        <code class="param-name optional">[PASSTHROUGH]</code>
+                        <span class="type">Object</span>
+                        <span class="flag optional" title="This parameter is optional.">optional</span>
+                    
+
+                    
+
+                    <div class="param-description">
+                         
+                    </div>
+
+                    
+                </li>
+            
+            </ul>
+        </div>
     
 
     

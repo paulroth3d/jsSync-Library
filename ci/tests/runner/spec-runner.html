@@ -8,160 +8,24 @@
     <link href="../../lib/jasmine-standalone-1.2.0/lib/jasmine-1.2.0/jasmine.css" type="text/css" rel="stylesheet" />
     
     <!-- Testing Utils -->
-    <script src="../util/ForcetkAjaxCall.js"></script>
-    <script src="../specs/testForcetkAjaxCall.js"></script>
+    <script src="../util/ScopeTestingObjects.js"></script>
     
     <!-- Data Stubs -->
-    <script src="../stubs/forcetkDataStubs.js"></script>
-    <script src="../stubs/smartStoreQueryCursorStubs.js"></script>
     
     <!-- mobile webkit bridge -->
     <script src="../mocks/PhantomMobileMock.js"></script>
     
-    <!-- forcetk -->
-    <script src="../../../GE_MobileMap/www/lib/jquery/jquery-1.6.2.min.js"></script>
-    <script src="../../../GE_MobileMap/www/lib/jquery/jquery-1.8.0.min.js"></script>
-    <script src="../../../GE_MobileMap/www/lib/forcetk.js"></script>
-    <script src="../../../GE_MobileMap/www/lib/MM_JSSyncEngine/MM_JSSyncEngine.js"></script>
-    
     <!-- project library files -->
+    <script src="../../../src/asynch.js" ></script>
     
     <!-- project mocks -->
-    <script src="../mocks/ForcetkAjaxCall.js"></script>
-    <script src="../mocks/forcetkMock.js"></script>
-    <script src="../mocks/MockCordova.js"></script>
-    <script src="../mocks/MockSmartStore.js"></script>
     
     <!-- index page mock -->
-    <script src="../mocks/IndexPageMock.js"></script>
     
     <!-- test specs -->
-    <script src="../specs/testStubs.js"></script>
-    <script src="../specs/testForcetkAjaxCall.js"></script>
-    <script src="../specs/testUtil.js"></script>
-    
-    <!-- Specs with the assumption jquery has loaded below -->
-    <script src="../specs/testIndexPageMock.js"></script>
-    <script src="../specs/testforcetkDataStubs.js"></script>
-    <script src="../specs/testForcetkMock.js"></script>
-
-    
-    
-    <!--
-    <# Data Stubs #>
-    <script src="../dataStubs/forcetkDataStubs.js"></script>
-    
-    <# mobile webkit bridge #>
-    <script src="../mocks/PhantomMobileMock.js"></script>
-    
-    <# project library files #>
-    <script src="../../../GE_MobileMap/www/lib/jquery/jquery-1.6.2.min.js"></script>
-    <script src="../../../GE_MobileMap/www/lib/jquery/jquery-1.8.0.min.js"></script>
-    <script src="../../../GE_MobileMap/www/lib/forcetk.js"></script>
-    
-    
-    <# project mocks #>
-    <script src="../mocks/MockCordova.js"></script>
-    <script src="../mocks/MockSmartStore.js"></script>
-    <script src="../mocks/ErrorLogMock.js"></script>
-    <script src="../mocks/OfflineQueueMock.js"></script>
-    <script src="../mocks/SmartStoreMock.js"></script>
-    <script src="../mocks/forcetkMock.js"></script>
-
-	<script type="text/javascript" src="../mocks/IndexPageMock.js"></script>
-    
-    <# test specs #>
-    <script src="../dataStubs/"></script>
-    <script src="../dataStubs/"></script>
-    <script src="../dataStubs/"></script>
-    <script src="../dataStubs/"></script>
-    -->
-    
-    <!--
-    <#Underscore#>
-    <script src="../../../library/underscore/underscore.1.4.2.js"></script>
-
-    <# Testing Utils #>
-    <script src="../util/ForcetkAjaxCall.js"></script>
-    <script src="../specs/testForcetkAjaxCall.js"></script>
-    
-    <# Data stubs #>
-	<script src="../dataStubs/syncDescribes.js"></script>
-    <script src="../dataStubs/AccountStubs.js"></script>
-    <script src="../dataStubs/metaDataStubs.js"></script>
-    <script src="../dataStubs/smartStoreQueryCursorStubs.js"></script>
-    <script src="../dataStubs/JSONconfig/sync.json"></script>
-    <script src="../dataStubs/forcetkDataStubs.js"></script>
-    
-    <# bridge to mimic a mobile webkit needed for the app to be properly tested #>
-    <script type="text/javascript" src="../mocks/PhantomMobileMock.js"></script>
-
-    
-    <# library #>
-    <#<script type="text/javascript" src="../../library/cordova/cordova.ios.1.8.1.js"></script>#>
-    <script type="text/javascript" src="../mocks/MockCordova.js"></script>
-    
-    <script type="text/javascript" src="../../library/errorHandler.js"></script>
-    <script type="text/javascript" src="../../library/jquery/jquery-1.6.2.min.js"></script>
-    <script type="text/javascript" src="../../library/jquery/jquery-1.8.0.min.js"></script>
-    <script type="text/javascript" src="../../library/jquery/plugins/jquery.blockUI.js"></script>
-    
-    <script type="text/javascript" src="../../library/forcetk.js"></script>
-    
-    <script type="text/javascript" src="../../library/SFHybridApp.js"></script>
-    <#
-    <script type="text/javascript" src="../../samples/www/jquery/jquery-1.6.2.js"></script
-    <script type="text/javascript" src="../../samples/www/forcetk.js"></script>
-    #>
-    <script type="text/javascript" src="../../library/SalesforceOAuthPlugin.js"></script>
-    <script type="text/javascript" src="../../library/SFSmartStorePlugin.js"></script>
-    <script type="text/javascript" src="../mocks/MockSmartStore.js"></script>
-    <script type="text/javascript" src="../../samples/www/bootconfig.js"></script>
-    
-    
-    
-    <# MM library files #>
-    <script src="../../library/vos/MetadataVO.js"></script>
-    <script src="../../library/ajaxToolkit.js"></script>
-    <script src="../../library/forcetk.js"></script>
-    <script src="../../library/views/StatusScreen.js"></script>
-    <script src="../../library/Network.js"></script>
-    <script src="../../library/OfflineQueue.js"></script>
-    <script src="../../library/MMSync.js"></script> 
-    <script src="../../library/SObject.js"></script>
-    <script src="../../library/Util.js"></script>
-    <script src="../../library/MMJSE_SmartStoreUtil.js"></script>
-    
-    <script type="text/javascript" src="../../library/SAGA_TEST.js"></script>
-    
-	<# Code Mocks stubs #>
-    <script type="text/javascript" src="../mocks/ErrorLogMock.js"></script>
-    <script type="text/javascript" src="../mocks/OfflineQueueMock.js"></script>
-    <script type="text/javascript" src="../mocks/SmartStoreMock.js"></script>
-    <script type="text/javascript" src="../mocks/forcetkMock.js"></script>
-
-	<script type="text/javascript" src="../mocks/IndexPageMock.js"></script>
-    
-    
-    
-
-    <# Specs/unitTests #>
-	<script type="text/javascript" src="../specs/sample_spec.js"></script>
-    <script type="text/javascript" src="../specs/testMetadataVO.js"></script>
-    <script type="text/javascript" src="../specs/testMMSync.js"></script>
-    <script type="text/javascript" src="../specs/testNetwork.js"></script>
-    <script type="text/javascript" src="../specs/testOfflineQueue.js"></script>
-    <script type="text/javascript" src="../specs/testErrorLog.js"></script>
-    <script type="text/javascript" src="../specs/views/testStatusScreen.js"></script>
-    <script type="text/javascript" src="../specs/testStubs.js"></script>
-    <script type="text/javascript" src="../specs/testUtil.js"></script>
-    <script type="text/javascript" src="../specs/testMMJSE_SmartStoreUtil.js"></script>
-
-    <# Specs with the assumption jquery has loaded below #>
-    <script type="text/javascript" src="../specs/testIndexPageMock.js"></script>
-    <script type="text/javascript" src="../specs/testforcetkDataStubs.js"></script>
-    <script type="text/javascript" src="../specs/testForcetkMock.js"></script>
-    -->
+    <script src="../specs/testCallbacks.js"></script>
+    <script src="../specs/testSuccessFailCallback.js"></script>
+    <script src="../specs/testCountDownCallback.js"></script>
     
 </head>
 <body>

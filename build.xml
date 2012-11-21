@@ -22,7 +22,7 @@
 	</if>
 	
 	<!-- properties that will never change -->
-	<property name="source.dir" value="GE_MobileMap" />
+	<property name="source.dir" value="src" />
 
 	<property name="output.dir" value="output" />
 
@@ -40,6 +40,8 @@
 	
 	<property name="dist.dir" value="dist" />
 	<property name="dist.file" value="JSSynch.js" />
+	<property name="dist.file.min" value="JSSynch.min.js" />
+	<property name="dist.zip.file" value="JSSynch.zip" />
 	
 	<property name="asynch.file" value="asynch.json" />
 	
@@ -66,6 +68,8 @@
 	
 	<property name="dist.path" value="${dist.dir}" />
 	<property name="dist.file.path" value="${dist.path}/${dist.file}" />
+	<property name="dist.min.path" value="${dist.path}/${dist.file.min}" />
+	<property name="dist.zip.path" value="${dist.path}/${dist.zip.file}" />
 	
 	<available file="${jenkins.phantomjs.path}" property="jenkins.phantomjs.found" />
 	<available file="${yui.jar.path}" property="yui.jar.found" />
@@ -107,8 +111,7 @@ yui.jar.found=${yui.jar.found}
 	-->
 	<target name="help">
 		<echo>
-GE GeoMapping project
-Intuitive and integrated geolocation-based account filtering, planning and route optimizing for mobile field sales users
+JavaScript asynchronous library
 
 Builder/CI Scripts.
 
@@ -129,7 +132,7 @@ Internal level targets are not meant to be called explicitly, but only by callin
 	<target name="build">
 	</target>
 	
-	<target name="doc">
+	<target name="doc" depends="docGen,docZip">
 	</target>
 	
 	<target name="minify" depends="minifyByName">
@@ -138,7 +141,7 @@ Internal level targets are not meant to be called explicitly, but only by callin
 	<target name="test" depends="run_jasmine">
 	</target>
 	
-	<target name="dist" depends="test,minify,removeFullFiles,build,doc">
+	<target name="dist" depends="test,combine,minify,build,doc">
 	</target>
 	
 	<!--
@@ -186,7 +189,7 @@ Internal level targets are not meant to be called explicitly, but only by callin
 	 *  (commonly set in build.properties)
 	 *  @depends minifyFile
 	**/
-	-->
+	
 	<target name="minifyByList">
 		<echo>List of files to minify: ${minification.order}</echo>
 		<foreach
@@ -200,6 +203,7 @@ Internal level targets are not meant to be called explicitly, but only by callin
 		
 		<echo>Done.</echo>
 	</target>
+	-->
 	
 	<!--
 	/**
@@ -209,19 +213,17 @@ Internal level targets are not meant to be called explicitly, but only by callin
 	**/
 	-->
 	<target name="minifyByName">
-		<foreach
-			target="minifyFile"
-			param="minify.target"
-			parallel="false"
-			trim="true"
+		<echo>Minifying [${dist.file.path}] to [${dist.min.path}]</echo>
+		<java
+			jar="${yui.jar.path}"
+			fork="true"
 		>
-			<path>
-				<!-- <filelist dir="${source.path}" files="*.full.txt" /> -->
-				<fileset dir="${source.path}" casesensitive="false">
-					<include name="**/*.full.js" />
-				</fileset>
-			</path>
-		</foreach>
+			<arg value="--type" />
+			<arg value="js" />
+			<arg value="-o" />
+			<arg value="${dist.min.path}" />
+			<arg value="${dist.file.path}" />
+		</java>
 		
 		<echo>Done.</echo>
 	</target>
@@ -231,19 +233,19 @@ Internal level targets are not meant to be called explicitly, but only by callin
 	 *  Removes all files with the .full.js extension
 	 *  (commonly called with minifyByName)
 	**/
-	-->
 	<target name="removeFullFiles">
 		<delete> 
 			<fileset dir="${source.path}" casesensitive="false">
 				<include name="**/*.full.js" />
 			</fileset>
 		</delete>
-	</target>	
+	</target>
+	-->
 	
 	<target name="combine">
-		<echo>Minification groups:${minification.order}</echo>
+		<echo>Minification groups:${minification.order} [${dist.file.path}]</echo>
 		<property name="combination.path" value="${output.path}/c" />
-		
+		<delete file="${dist.file.path}" />
 		<concat append="true" destfile="${dist.file.path}" fixlastline="true">
 			<filelist dir="${source.path}" files="asynch.js" />
 		</concat>
@@ -268,7 +270,12 @@ Internal level targets are not meant to be called explicitly, but only by callin
 	</target>
 	
 	<target name="docZip">
+		<echo>Completed building documentation: ${doc.gen.path}</echo>
 		
+		<zip destfile="${dist.zip.path}"
+			basedir="${doc.gen.path}"
+		/>
+		<echo>Wrote out documentation zip: ${dist.zip.path}</echo>
 	</target>
 
 	<!--
@@ -279,8 +286,8 @@ Internal level targets are not meant to be called explicitly, but only by callin
 	
 	<target name="applyVersion" description="Applies the version defined in build.properties to the MMSync.js file">
 		<echo>Applying library version ${build.version} to the project</echo>
-		<replaceregexp file="${asynch.path}"
-				match='["]appVersion["]:["][^"\n]+["]'
+		<replaceregexp file="${doc.config.path}"
+				match='["]version["]:["][^"\n]+["]'
 				replace='"appVersion":"${build.version}"'
 				flags="img" encoding="UTF-8"
 		/>
@@ -340,16 +347,7 @@ Internal level targets are not meant to be called explicitly, but only by callin
 					</then>
 				</if>
 				
-				<java
-					jar="${yui.jar.path}"
-					fork="true"
-				>
-					<arg value="--type" />
-					<arg value="js" />
-					<arg value="-o" />
-					<arg value="${minify.target.name}" />
-					<arg value="${minify.target}" />
-				</java>
+				
 			</then>
 			<else>
 				<echo>Unable to minify [${minify.target}]</echo>

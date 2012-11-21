@@ -1,8 +1,8 @@
 {
 	"name":"MM Sync Engine",
 	"description":"GE MobileMap",
-	"version":"0.0.1",
-	"logo":"http://mm-proth.s3.amazonaws.com/ge_mobileMap/icon/icon-72.png",
+	"appVersion":"1.0.0",
+	"logo":"http://mm-proth.s3.amazonaws.com/syncIcon.png",
 	"options": {
 		"paths":"*.js"
 	}
