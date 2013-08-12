@@ -248,6 +248,7 @@ Internal level targets are not meant to be called explicitly, but only by callin
 		<delete file="${dist.file.path}" />
 		<concat append="true" destfile="${dist.file.path}" fixlastline="true">
 			<filelist dir="${source.path}" files="asynch.js" />
+			<filelist dir="${source.path}" files="logger.js" />
 		</concat>
 	</target>
 	
