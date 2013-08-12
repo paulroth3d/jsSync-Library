@@ -1,7 +1,7 @@
 /*
  *  Collection of asynchronous utils
 */
-/*global Ext */
+/*global Ext console DEBUG */
 
 /**
  *  Object that represents a specific method invocation that can be called at any time
@@ -139,9 +139,24 @@ var emptySFCallback = new SuccessFailCallback( this, function(){}, this, functio
 **/
 var isSuccessFailCallback = function( obj ){
 	return( obj && obj.success && obj.fail );
-}
+};
 
 //-- sample success fail callbacks
+function logMsg( msg ){
+	if( typeof DEBUG === "undefined" && DEBUG !== false ){
+		console.log( logMsg );
+	}
+}
+
+function logObj( msg, obj ){
+	logMsg( msg );
+	logObj( obj );
+}
+
+function printArguments(){
+	console.og( arguments );
+}
+
 /**
  *  simple function that claims sucess and console logs out all arguments.
  *  <p>Example usage: forcetkClient.query( myQuery, simpleSuccess, simpleFailure );</p>
@@ -185,7 +200,7 @@ this, function( noun, verb ){
 	debugger;
 	console.log( "a " + noun + " failed to " + verb );
 });
-
+*/
 //-- inline test
 //successFailure.success( "dog", "jumped" );
 //successFailure.fail( "programmer", "sleep " );

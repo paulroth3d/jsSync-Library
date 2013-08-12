@@ -1,15 +1,17 @@
-/**
+/*
  *  Collection of asynchronous utils
-**/
-/*global Ext */
+*/
+/*global Ext console DEBUG */
 
 /**
  *  Object that represents a specific method invocation that can be called at any time
  *  (or repeatedly) in an agnostic manner.
+ *  @module JSAsynch
+ *  @class Callback
+ *  @constructor
  *  @param thisObj (Object) the scope object (commonly used for 'this') that the method will run in.
  *  @param fn (Function) the function to call
 **/
-
 var Callback = function( thisObj, callbackFn ){
 	
 	this.init( thisObj, callbackFn );
@@ -17,6 +19,11 @@ var Callback = function( thisObj, callbackFn ){
 	return( this );
 };
 
+/**
+ *  Describes the object as being a callback
+ *  @for Callback
+ *  @property isCallback
+**/
 Callback.prototype.isCallback = true;
 
 Callback.prototype.init = function( thisObj, callbackFn ){
@@ -34,6 +41,11 @@ Callback.prototype.init = function( thisObj, callbackFn ){
 	}
 };
 
+/**
+ * Empty method to provide a NOOP
+ * @method empty
+ * @protected
+ **/
 Callback.prototype.empty = function(){};
 
 /**
@@ -41,6 +53,8 @@ Callback.prototype.empty = function(){};
  *  <p>Note, exec, callback, run, among other names could potentially be considered keywoards,
  *  so the name was chosen instead</p>
  *  <p>Calling the method with a null scope can cause some unexpected consequences</p>
+ *  @method execCallback
+ *  @param [PASSTHROUGH]
 **/
 Callback.prototype.execCallback = function(){
 	//alert( 'callback was requested' );
@@ -62,6 +76,8 @@ cb.execCallback( "cat", "jump" );
 
 /**
  *  Empty callback if a callback must exist but not do anything.
+ *  @module JSAsynch
+ *  @class EmptyCallback
 **/
 var EmptyCallback = function(){
 	var emptyFn = function(){};
@@ -76,32 +92,77 @@ EmptyCallback.prototype.constructor = EmptyCallback;
 
 /**
  *  Object that supports both a success and a failure
+ *  @class SuccessFailCallback
+ *  @constructor
+ *  @extends Callback
+ *  @param {Object} successThis
+ *  @param {Function} succcessFn
+ *  @param {Object} failureThis
+ *  @param {Function} failureFn
 **/
 var SuccessFailCallback = function( successThis, successFn, failureThis, failureFn ){
 	this.successCB = new Callback( successThis, successFn );
 	this.failureCB = new Callback( failureThis, failureFn );
 };
 
-SuccessFailCallback.isCallback = true;
+SuccessFailCallback.prototype.isCallback = true;
 
+/**
+ *  Calls success method.
+ *  (Meaning it calls the successFn using successThis as the scope
+ *  @method success
+ *  @for SuccessFailCallback
+ *  @param [PASSTHROUGH]
+**/
 SuccessFailCallback.prototype.success = function(){
 	this.successCB.execCallback.apply( this.successCB, arguments );
 };
 
+/**
+ *  Calls failure method.
+ *  (Meaning it calls the failureFn using failureThis as the scope
+ *  @method fail
+ *  @for SuccessFailCallback
+ *  @param [PASSTHROUGH]
+**/
 SuccessFailCallback.prototype.fail = function(){
 	this.failureCB.execCallback.apply( this.failureCB, arguments );
 };
 
 var emptySFCallback = new SuccessFailCallback( this, function(){}, this, function(){} );
 
+/**
+ *  Determines whether the object is a successFailCallback
+ *  @global
+ *  @method isSuccessFailCallback
+ *  @param {Object} obj - object to be determined whether it is a successFailCallback
+**/
 var isSuccessFailCallback = function( obj ){
 	return( obj && obj.success && obj.fail );
-}
+};
 
 //-- sample success fail callbacks
+function logMsg( msg ){
+	if( typeof DEBUG === "undefined" && DEBUG !== false ){
+		console.log( logMsg );
+	}
+}
+
+function logObj( msg, obj ){
+	logMsg( msg );
+	logObj( obj );
+}
+
+function printArguments(){
+	console.og( arguments );
+}
+
 /**
  *  simple function that claims sucess and console logs out all arguments.
  *  <p>Example usage: forcetkClient.query( myQuery, simpleSuccess, simpleFailure );</p>
+ *  @global
+ *  @method simpleSuccess
+ *  @param [PASSTHROUGH]
 **/
 function simpleSuccess( successObj ){
 	logMsg( "success" );
@@ -111,6 +172,9 @@ function simpleSuccess( successObj ){
 /**
  *  Simple function that claims failure and console logs out all arguments
  *  <p>Example usage: forcetkClient.query( myQuery, simpleSuccess, simpleFailure );</p>
+ *  @global
+ *  @method simpleFailure
+ *  @param [PASSTHROUGH]
 **/
 function simpleFailure( failObj ){
 	logMsg( "fail" );
@@ -121,6 +185,8 @@ function simpleFailure( failObj ){
  *  Simple callback that simply claims success, or failure and console logs the results.
  *  <p>Note: it may be preferrable to use a different object with large datasets/volumes
  *  as consolelog, especially from the device can have issues with too many records being printed at a time</p>
+ *  @property debugCB
+ *  @global
 **/
 var debugCB = new SuccessFailCallback( this, simpleSuccess, this, simpleFailure );
 
@@ -134,7 +200,7 @@ this, function( noun, verb ){
 	debugger;
 	console.log( "a " + noun + " failed to " + verb );
 });
-
+*/
 //-- inline test
 //successFailure.success( "dog", "jumped" );
 //successFailure.fail( "programmer", "sleep " );
@@ -144,6 +210,12 @@ this, function( noun, verb ){
 
 /**
  *  Object that has a set number of latches. Once all the latches are released
+ *  @class CountdownCallback
+ *  @constructor
+ *  @param {int} latchCount
+ *  @param {Object} thisObj
+ *  @param {Function} callbackFn
+ *  @extends Callback
 **/
 var CountdownCallback = function( latchCount, thisObj, callbackFn ){
 	this.latchCount = latchCount;
@@ -159,6 +231,8 @@ CountdownCallback.prototype.constructor = CountdownCallback;
 
 /**
  *  Adds a latch to the count as something else that needs to be waited for
+ *  @method addStrap
+ *  @for CountdownCallback
 **/
 CountdownCallback.prototype.addStrap = function(){
 	this.latchCount++;
@@ -167,6 +241,7 @@ CountdownCallback.prototype.addStrap = function(){
 
 /**
  *  Determines the number of latches remaining
+ *  @method getLatchCount
 **/
 CountdownCallback.prototype.getLatchCount = function(){
 	return( this.latchCount );
@@ -174,6 +249,7 @@ CountdownCallback.prototype.getLatchCount = function(){
 
 /**
  *  Determines if the latch is currently released
+ *  @method isReleased
 **/
 CountdownCallback.prototype.isReleased = function(){
 	return( this.latchCount <= 0 );
@@ -182,6 +258,8 @@ CountdownCallback.prototype.isReleased = function(){
 /**
  *  Releases a latch and executes the callbackFn if all the latches are released.
  *  @param boolean - whether the latch is currently released
+ *  @method release
+ *  @param [PASSTHROUGH]
 **/
 CountdownCallback.prototype.release = function(){
 	this.latchCount--;
@@ -218,6 +296,9 @@ ccb.release('dog','jump');
 /**
  * NamedLatch requires that all latches provided must be released
  * This means that latches must be unique or will throw an exception.
+ * @class NamedLatch
+ * @constructor
+ * @extends CountdownCallback
  * @param latchList (Array<String>)
  * @param thisObj
  * @param callbackFn
@@ -301,6 +382,11 @@ NamedLatch.prototype.hasLatch = function( latchName ){
 	return( this.latches.hasOwnProperty( latchName ));
 };
 
+/**
+ *  Determines whether a named latch has been released
+ *  @method isLatchReleased
+ *  @param {String} latchName
+**/
 NamedLatch.prototype.isLatchReleased = function( latchName ){
 	if( !latchName ){
 		return;
@@ -359,6 +445,12 @@ myNamedLatch.release( "JQuery", ["dog", "jump"] );
 //-	#	#	#	#	#	#	#	#	#	#	#	#	#	#	#	#	#	#	#	
 /**
  *  Object that represents a cyclical barrier
+ *  @class CyclicalCallback
+ *  @constructor
+ *  @extends CountdownCallback
+ *  @param {int} latchCount
+ *  @param {Object} thisObj
+ *  @param {Function} callbackFn
 **/
 var CyclicalCallback = function( latchCount, thisObj, callbackFn ){
 	this.latchCount = latchCount;
@@ -400,11 +492,20 @@ ccb.release('dog','jump');
  *  Abstract class that contains a callback that should execute at some point after
  *  completing run. (This allows for asynchronous methods to run that should perform
  *  a callback when it has completed)
+ *  @class RunnableCallback
+ *  @constructor
 **/
 var RunnableCallback = function( callback ){
 	this.callback = callback;
 };
 
+RunnableCallback.prototype.isCallback = true;
+
+/**
+ *  Calls the callback
+ *  @method run
+ *  @param [PASSTHROUGH]
+**/
 RunnableCallback.prototype.run = function(){
 	//-- provide additional logic if needed
 	this.callback.execCallback.apply( this, arguments );
