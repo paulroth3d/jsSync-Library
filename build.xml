@@ -39,7 +39,7 @@
 	<property name="doc.config.file" value="yuidoc.json" />
 	
 	<property name="dist.dir" value="dist" />
-	<property name="dist.file" value="JSSynch.js" />
+	<property name="dist.file" value="JSSynch.full.js" />
 	<property name="dist.file.min" value="JSSynch.min.js" />
 	<property name="dist.zip.file" value="JSSynch.zip" />
 	

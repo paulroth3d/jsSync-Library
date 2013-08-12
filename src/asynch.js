@@ -1,7 +1,7 @@
 /*
  *  Collection of asynchronous utils
 */
-/*global Ext console DEBUG */
+/*global Ext console DEBUG logMsg logObj printArguments */
 
 /**
  *  Object that represents a specific method invocation that can be called at any time
@@ -142,21 +142,6 @@ var isSuccessFailCallback = function( obj ){
 };
 
 //-- sample success fail callbacks
-function logMsg( msg ){
-	if( typeof DEBUG === "undefined" && DEBUG !== false ){
-		console.log( logMsg );
-	}
-}
-
-function logObj( msg, obj ){
-	logMsg( msg );
-	logObj( obj );
-}
-
-function printArguments(){
-	console.og( arguments );
-}
-
 /**
  *  simple function that claims sucess and console logs out all arguments.
  *  <p>Example usage: forcetkClient.query( myQuery, simpleSuccess, simpleFailure );</p>
